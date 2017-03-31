@@ -139,16 +139,24 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Accommodation.cpp" />
     <ClCompile Include="Date.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Menus.cpp" />
+    <ClCompile Include="Node.cpp" />
+    <ClCompile Include="TravelAgency.cpp" />
     <ClCompile Include="utils.cpp" />
+    <ClCompile Include="Weight.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Accommodation.h" />
     <ClInclude Include="Date.h" />
     <ClInclude Include="exceptions.h" />
     <ClInclude Include="Menus.h" />
+    <ClInclude Include="Node.h" />
+    <ClInclude Include="TravelAgency.h" />
     <ClInclude Include="utils.h" />
+    <ClInclude Include="Weight.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
