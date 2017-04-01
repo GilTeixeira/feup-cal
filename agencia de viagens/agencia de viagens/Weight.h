@@ -10,8 +10,8 @@ class Weight
 {
 	
 	string type;
+	float price_in_euros;
 	unsigned int time_in_minutes; 
-	float price_in_euros; 
 
 public:
 	Weight(string type, int time_in_minutes, float price_in_euros);

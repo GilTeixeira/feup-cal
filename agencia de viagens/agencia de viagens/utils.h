@@ -21,9 +21,4 @@ using namespace std;
 void clrscr();
 
 template<typename T>bool check_duplicates(vector<T> v,T arg);
-/**
-*@brief saves the information of an object of type class in the textfile, used in Faculdade::save_dept
-*@param f ofstream that contains reference to the file
-*@param x student to save
-*@return returns a true if it already exist else false
-*/
+

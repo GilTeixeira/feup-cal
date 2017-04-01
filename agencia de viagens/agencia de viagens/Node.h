@@ -2,7 +2,7 @@
 
 #include <string>
 #include "Accommodation.h"
-typedef long long int BigInt;
+typedef long int BigInt;
 using namespace std;
 class Node
 {
