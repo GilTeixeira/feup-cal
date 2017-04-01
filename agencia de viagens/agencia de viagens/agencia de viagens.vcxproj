@@ -152,6 +152,7 @@
     <ClInclude Include="Accommodation.h" />
     <ClInclude Include="Date.h" />
     <ClInclude Include="exceptions.h" />
+    <ClInclude Include="Graph.h" />
     <ClInclude Include="Menus.h" />
     <ClInclude Include="Node.h" />
     <ClInclude Include="TravelAgency.h" />
