@@ -28,6 +28,7 @@ TravelAgency::TravelAgency()
 		throw exception_or_error("O ficheiro esta corrompido, problema encontrado na linha " + to_string(linenum) + ", esperava-se #End");
 
 	f.close();
+	linenum = 0;
 	f.open("Edges.txt");
 	if (!f.is_open()) {
 		throw exception_or_error("O ficheiro Edges.txt nao foi encontrado verifique se o mesmo existe ou esta em local adequado");

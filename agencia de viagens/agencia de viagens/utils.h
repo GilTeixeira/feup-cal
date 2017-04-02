@@ -14,6 +14,7 @@
 #include "Node.h"
 #include "Accommodation.h"
 #include "Weight.h"
+#include "TravelAgency.h"
 
 using namespace std;
 typedef unsigned int uint;
@@ -25,10 +26,14 @@ typedef unsigned int uint;
 */
 void clrscr();
 
-template<typename T>bool check_duplicates(vector<T> v,T arg);
+//template<typename T>bool check_duplicates(const vector<T> &v,T arg);
 
 void read_line(ifstream & f, string & line, uint &linenum);
 
 Node read_node(ifstream &f, uint &linenum);
 
 pair < string, Weight> read_weight(ifstream &f, uint &linenum);
+
+double minutesToHours(const int &time_in_minutes);
+
+double minutesToDays(const int &time_in_minutes);

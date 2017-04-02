@@ -10,6 +10,7 @@ class Node
 	Accommodation accommodation;
 public:
 	Node( string cityName, Accommodation accommodation);
-	string getCityName();
+	string getCityName() const;
+	bool operator==(const Node &node) const;
 };
 

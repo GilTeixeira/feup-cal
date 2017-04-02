@@ -1,13 +1,13 @@
 #include "Accommodation.h"
 
-Accommodation::Accommodation(){}
+//Accommodation::Accommodation(){}
 
-Accommodation::Accommodation(float price)
+Accommodation::Accommodation(double price)
 {
 	this->price = price;
 }
 
-float Accommodation::getPrice()
+double Accommodation::getPrice() const
 {
 	return price;
 

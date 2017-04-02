@@ -21,15 +21,8 @@
 
 using namespace std;
 
-
-/**
-*@brief Menu to ask user to read from a text file.
-*@return True to exit program, false to repeat.
-*/
-bool menuTextFile();
-
 /**
 *@brief Main Menu.
 *@param ....
 */
-void mainMenu();
+void mainMenu(TravelAgency &travelAgency);

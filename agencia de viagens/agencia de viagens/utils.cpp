@@ -21,15 +21,15 @@ void clrscr(void)
 	SetConsoleCursorPosition(hCon, upperLeftCorner);
 }
 
-template<typename T>
-bool check_duplicates(vector<T> v, T arg)
-{
-	for (auto x : v) {
-		if (x->get_name() == arg->get_name() || x->get_code() == arg->get_code())
-			return true;
-	}
-	return false;
-}
+//template<typename T>
+//bool check_duplicates(const vector<T> &v, T arg)
+//{
+//	for (auto x : v) {
+//		if (x->get_name() == arg->get_name() || x->get_code() == arg->get_code())
+//			return true;
+//	}
+//	return false;
+//}
 
 void read_line(ifstream & f, string & line, uint &linenum)
 {
@@ -77,4 +77,14 @@ pair < string ,Weight> read_weight(ifstream &f, uint &linenum) {
 	linetmp.erase(0, linetmp.find(';') + 1);
 
 	return pair<string , Weight> (source+" "+ dest, Weight(type, minutes, price));
+}
+
+double minutesToHours(const int &time_in_minutes)
+{
+	return (double)time_in_minutes / 60.0;
+}
+
+double minutesToDays(const int &time_in_minutes) 
+{
+	return (double)time_in_minutes / (1440.0);
 }
