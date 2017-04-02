@@ -20,7 +20,7 @@ TravelAgency::TravelAgency()
 	}
 
 	while (f.peek() != '#') {
-		nodes.push_back(read_node(f, linenum));
+		travelAgencyGraph.addVertex(Node(read_node(f, linenum)));
 	}
 
 	read_line(f, linetmp, linenum);
@@ -40,7 +40,11 @@ TravelAgency::TravelAgency()
 	}
 
 	while (f.peek() != '#') {
-		aresta.push_back(read_weight(f, linenum));
+		string sourceStr, destStr;
+		Weight tmpW = read_edge(f, linenum, sourceStr, destStr);
+		Node source = Node(sourceStr, Accommodation(0.0));
+		Node dest = Node(destStr, Accommodation(0.0));
+		travelAgencyGraph.addEdge(source, dest, tmpW);
 	}
 
 	read_line(f, linetmp, linenum);

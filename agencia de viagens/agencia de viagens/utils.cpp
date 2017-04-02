@@ -54,8 +54,8 @@ Node read_node(ifstream &f, uint &linenum){
 	return Node(name, tmp);
 }
 
-pair < string ,Weight> read_weight(ifstream &f, uint &linenum) {
-	string source, dest, type, linetmp;
+Weight read_edge(ifstream &f, uint &linenum, string &source,string &dest) {
+	string type, linetmp;
 	float price;
 	int minutes;
 
@@ -76,7 +76,7 @@ pair < string ,Weight> read_weight(ifstream &f, uint &linenum) {
 	minutes = stoi(linetmp.substr(0, linetmp.find(';')));
 	linetmp.erase(0, linetmp.find(';') + 1);
 
-	return pair<string , Weight> (source+" "+ dest, Weight(type, minutes, price));
+	return  Weight(type, minutes, price);
 }
 
 double minutesToHours(const int &time_in_minutes)

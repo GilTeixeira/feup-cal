@@ -1,12 +1,10 @@
 #pragma once
 #include "utils.h"
 #include "exceptions.h"
-
+#include "Graph.h"
 class TravelAgency
 {
-
-	vector<Node> nodes;
-	vector < pair <string, Weight> > aresta;
+	Graph<Node> travelAgencyGraph;
 public:
 	TravelAgency();
 	
