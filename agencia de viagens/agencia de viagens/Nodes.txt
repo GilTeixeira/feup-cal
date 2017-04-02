@@ -1,0 +1,13 @@
+#Vertex_start
+Porto;30
+Lisboa;40
+Madrid;60
+Londres;120
+#End
+
+
+
+
+
+
+

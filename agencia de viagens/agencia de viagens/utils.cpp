@@ -30,3 +30,51 @@ bool check_duplicates(vector<T> v, T arg)
 	}
 	return false;
 }
+
+void read_line(ifstream & f, string & line, uint &linenum)
+{
+		getline(f, line);
+		++linenum;
+}
+
+Node read_node(ifstream &f, uint &linenum){
+	string name, linetmp;
+	float price;
+
+	read_line(f, linetmp, linenum);
+
+	name = linetmp.substr(0, linetmp.find(';'));
+	linetmp.erase(0, linetmp.find(';') + 1);
+
+	price = stof(linetmp.substr(0, linetmp.find(';')));
+	linetmp.erase(0, linetmp.find(';') + 1);
+	//to add future changes for accomodation, provavelmente vai precisar de uma função propria
+
+	Accommodation tmp = Accommodation(price);
+	return Node(name, tmp);
+}
+
+pair < string ,Weight> read_weight(ifstream &f, uint &linenum) {
+	string source, dest, type, linetmp;
+	float price;
+	int minutes;
+
+	read_line(f, linetmp, linenum);
+
+	source = linetmp.substr(0, linetmp.find(';'));
+	linetmp.erase(0, linetmp.find(';') + 1);
+
+	dest = linetmp.substr(0, linetmp.find(';'));
+	linetmp.erase(0, linetmp.find(';') + 1);
+
+	type = linetmp.substr(0, linetmp.find(';'));
+	linetmp.erase(0, linetmp.find(';') + 1);
+
+	price = stof(linetmp.substr(0, linetmp.find(';')));
+	linetmp.erase(0, linetmp.find(';') + 1);
+
+	minutes = stoi(linetmp.substr(0, linetmp.find(';')));
+	linetmp.erase(0, linetmp.find(';') + 1);
+
+	return pair<string , Weight> (source+" "+ dest, Weight(type, minutes, price));
+}

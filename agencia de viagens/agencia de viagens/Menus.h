@@ -13,6 +13,7 @@
 
 #include "utils.h"
 #include "exceptions.h"
+#include "TravelAgency.h"
 #include <cstdlib>
 #undef max
 

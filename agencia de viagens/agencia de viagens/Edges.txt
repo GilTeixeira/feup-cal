@@ -1,0 +1,10 @@
+#Edges_start
+Porto;Lisboa;Airplane;20;30
+Porto;Madrid;Airplane;30;120
+Porto;Londres;Ship;180;20
+Lisboa;Porto;Airplane;20;30
+Lisboa;Madrid;Airplane;10;100
+Madrid;Porto;Airplane;30;120
+Londres;Porto;Ship;5;180
+Londres;Porto;Airplane;50;100
+#End

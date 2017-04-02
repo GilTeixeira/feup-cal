@@ -1,9 +1,14 @@
 #pragma once
+#include "utils.h"
+#include "exceptions.h"
+
 class TravelAgency
 {
 
-	//vai conter o grafo e todas as funções relacionadas com o mesmo, o menu só chama estas funções.
+	vector<Node> nodes;
+	vector < pair <string, Weight> > aresta;
 public:
 	TravelAgency();
+	
 };
 
