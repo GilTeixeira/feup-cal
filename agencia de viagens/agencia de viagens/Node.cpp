@@ -1,8 +1,9 @@
 #include "Node.h"
 
-Node::Node(string cityName, Accommodation accommodation)
+Node::Node(int nodeID, string cityName, Accommodation accommodation)
 	: accommodation(accommodation)
 {
+	this->nodeID = nodeID;
 	this->cityName = cityName;
 }
 
@@ -11,7 +12,11 @@ string Node::getCityName() const
 	return cityName;
 }
 
+int Node::getNodeID() const {
+	return nodeID;
+}
+
 bool Node::operator==(const Node & node) const
 {
-	return cityName == node.getCityName();
+	return nodeID == node.getNodeID();
 }

@@ -1,8 +1,8 @@
 #Vertex_start
-Porto;30
-Lisboa;40
-Madrid;60
-Londres;120
+1;Porto;30
+2;Lisboa;40
+3;Madrid;60
+4;Londres;120
 #End
 
 

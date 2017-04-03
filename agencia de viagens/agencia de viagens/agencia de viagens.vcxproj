@@ -145,6 +145,7 @@
     <ClCompile Include="Menus.cpp" />
     <ClCompile Include="Node.cpp" />
     <ClCompile Include="TravelAgency.cpp" />
+    <ClCompile Include="TripInfo.cpp" />
     <ClCompile Include="utils.cpp" />
     <ClCompile Include="Weight.cpp" />
   </ItemGroup>
@@ -156,6 +157,7 @@
     <ClInclude Include="Menus.h" />
     <ClInclude Include="Node.h" />
     <ClInclude Include="TravelAgency.h" />
+    <ClInclude Include="TripInfo.h" />
     <ClInclude Include="utils.h" />
     <ClInclude Include="Weight.h" />
   </ItemGroup>

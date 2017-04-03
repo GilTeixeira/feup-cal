@@ -43,6 +43,9 @@ Node read_node(ifstream &f, uint &linenum){
 
 	read_line(f, linetmp, linenum);
 
+	int nodeID = stoi(linetmp.substr(0, linetmp.find(';')));
+	linetmp.erase(0, linetmp.find(';') + 1);
+
 	name = linetmp.substr(0, linetmp.find(';'));
 	linetmp.erase(0, linetmp.find(';') + 1);
 
@@ -51,32 +54,37 @@ Node read_node(ifstream &f, uint &linenum){
 	//to add future changes for accomodation, provavelmente vai precisar de uma função propria
 
 	Accommodation tmp = Accommodation(price);
-	return Node(name, tmp);
+	return Node(nodeID, name, tmp);
 }
 
-Weight read_edge(ifstream &f, uint &linenum, string &source,string &dest) {
+Weight read_edge(ifstream &f, uint &linenum, int &source,int &dest) {
 	string type, linetmp;
 	float price;
 	int minutes;
+	Weight edgeWeight= Weight();
 
 	read_line(f, linetmp, linenum);
 
-	source = linetmp.substr(0, linetmp.find(';'));
+	source = stoi(linetmp.substr(0, linetmp.find(';')));
 	linetmp.erase(0, linetmp.find(';') + 1);
 
-	dest = linetmp.substr(0, linetmp.find(';'));
+	dest = stoi(linetmp.substr(0, linetmp.find(';')));
 	linetmp.erase(0, linetmp.find(';') + 1);
 
-	type = linetmp.substr(0, linetmp.find(';'));
-	linetmp.erase(0, linetmp.find(';') + 1);
+	while (linetmp.find(';') != -1) {
+		type = linetmp.substr(0, linetmp.find(';'));
+		linetmp.erase(0, linetmp.find(';') + 1);
 
-	price = stof(linetmp.substr(0, linetmp.find(';')));
-	linetmp.erase(0, linetmp.find(';') + 1);
+		price = stof(linetmp.substr(0, linetmp.find(';')));
+		linetmp.erase(0, linetmp.find(';') + 1);
 
-	minutes = stoi(linetmp.substr(0, linetmp.find(';')));
-	linetmp.erase(0, linetmp.find(';') + 1);
+		minutes = stoi(linetmp.substr(0, linetmp.find(';')));
+		linetmp.erase(0, linetmp.find(';') + 1);
 
-	return  Weight(type, minutes, price);
+		edgeWeight.addTripInfo(TripInfo(type, minutes, price));
+	}
+
+	return  edgeWeight;
 }
 
 double minutesToHours(const int &time_in_minutes)

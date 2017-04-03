@@ -32,7 +32,7 @@ void read_line(ifstream & f, string & line, uint &linenum);
 
 Node read_node(ifstream &f, uint &linenum);
 
-Weight read_edge(ifstream &f, uint &linenum, string& source, string &dest);
+Weight read_edge(ifstream &f, uint &linenum, int& source, int &dest);
 
 double minutesToHours(const int &time_in_minutes);
 
