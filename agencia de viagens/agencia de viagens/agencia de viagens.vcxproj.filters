@@ -42,6 +42,15 @@
     <ClCompile Include="TripInfo.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="connection.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="graphviewer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="FichaJUNG.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="utils.h">
@@ -74,6 +83,15 @@
     <ClInclude Include="TripInfo.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="graphviewer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="edgetype.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="connection.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Nodes.txt">
@@ -82,5 +100,10 @@
     <Text Include="Edges.txt">
       <Filter>Resource Files</Filter>
     </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="GraphViewerController.jar">
+      <Filter>Source Files</Filter>
+    </None>
   </ItemGroup>
 </Project>

@@ -43,7 +43,7 @@
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
-    <CharacterSet>Unicode</CharacterSet>
+    <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -104,6 +104,7 @@
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
+      <AdditionalDependencies>wsock32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -140,7 +141,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Accommodation.cpp" />
+    <ClCompile Include="connection.cpp" />
     <ClCompile Include="Date.cpp" />
+    <ClCompile Include="FichaJUNG.cpp" />
+    <ClCompile Include="graphviewer.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Menus.cpp" />
     <ClCompile Include="Node.cpp" />
@@ -151,9 +155,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Accommodation.h" />
+    <ClInclude Include="connection.h" />
     <ClInclude Include="Date.h" />
+    <ClInclude Include="edgetype.h" />
     <ClInclude Include="exceptions.h" />
     <ClInclude Include="Graph.h" />
+    <ClInclude Include="graphviewer.h" />
     <ClInclude Include="Menus.h" />
     <ClInclude Include="Node.h" />
     <ClInclude Include="TravelAgency.h" />
@@ -164,6 +171,9 @@
   <ItemGroup>
     <Text Include="Edges.txt" />
     <Text Include="Nodes.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="GraphViewerController.jar" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
