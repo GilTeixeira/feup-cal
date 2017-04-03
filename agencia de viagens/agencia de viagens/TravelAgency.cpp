@@ -40,11 +40,11 @@ TravelAgency::TravelAgency()
 	}
 
 	while (f.peek() != '#') {
-		int sourceID, destID;
-		Weight tmpW = read_edge(f, linenum, sourceID, destID);
+		int sourceID, destID, edgeID;
+		Weight tmpW = read_edge(f, linenum, sourceID, destID, edgeID);
 		Node source = Node(sourceID,"", Accommodation(0.0));
 		Node dest = Node(destID,"", Accommodation(0.0));
-		travelAgencyGraph.addEdge(source, dest, tmpW);
+		travelAgencyGraph.addEdge(source, dest, tmpW,edgeID);
 	}
 
 	read_line(f, linetmp, linenum);

@@ -57,13 +57,16 @@ Node read_node(ifstream &f, uint &linenum){
 	return Node(nodeID, name, tmp);
 }
 
-Weight read_edge(ifstream &f, uint &linenum, int &source,int &dest) {
+Weight read_edge(ifstream &f, uint &linenum, int &source,int &dest, int &edgeID) {
 	string type, linetmp;
 	float price;
 	int minutes;
 	Weight edgeWeight= Weight();
 
 	read_line(f, linetmp, linenum);
+
+	edgeID = stoi(linetmp.substr(0, linetmp.find(';')));
+	linetmp.erase(0, linetmp.find(';') + 1);
 
 	source = stoi(linetmp.substr(0, linetmp.find(';')));
 	linetmp.erase(0, linetmp.find(';') + 1);
