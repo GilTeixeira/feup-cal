@@ -88,3 +88,25 @@ bool operator<(const Date &date1, const Date &date2){
 bool Date::operator==(const Date &date) const {
 	return (day == date.getDay() && month == date.getMonth() && year == date.getYear());
 }
+
+
+
+int Date::getDayofTheWeek() const {
+	int k, m, C, Y, W;
+
+	Y = year % 100;
+
+	if (month == 1 || month == 2) {
+		m = month + 10;
+		Y--;
+	} else
+		m = month - 2;
+
+	C = year / 100;
+
+	k = day;
+
+	W = (k + (int) floor(2.6 * m - 0.2) - 2 * C + Y + Y / 4 + C / 4) % 7;
+
+	return W;
+}

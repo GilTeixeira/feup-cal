@@ -78,5 +78,12 @@ public:
 	*@return True if date1 is older than date2, false otherwise.
 	*/
 	friend bool operator<(const Date &date1, const Date &date2);
+
+	/**
+	*Disparate variation of the Gauss's Algorithm that determinates the Day of the Week.
+	*@brief Determination of the day of the week
+	*@return The day of the week(0 = Sunday, ..., 6 = Saturday)
+	*/
+	int getDayofTheWeek() const;
 };
 
