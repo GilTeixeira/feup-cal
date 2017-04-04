@@ -1,6 +1,7 @@
 #pragma once
 
 #include <vector>
+#include <map>
 #include "date.h"
 class Accommodation
 {
@@ -8,6 +9,7 @@ class Accommodation
 	double price;
 	vector < pair <Date, Date> > datesPriceChange;
 	vector <double> percentageToChange;
+	static map<int, double> const Accommodation::percentageDay;
 
 public:
 	/*Accommodation();*/
