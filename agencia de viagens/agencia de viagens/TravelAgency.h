@@ -6,9 +6,8 @@
 class TravelAgency
 {
 	Graph<Node> travelAgencyGraph;
-
+	vector<string> transportTypes;
 public:
 	TravelAgency();
-	
 };
 

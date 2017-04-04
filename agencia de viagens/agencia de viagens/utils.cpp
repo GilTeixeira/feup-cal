@@ -83,7 +83,7 @@ Node read_node(ifstream &f, uint &linenum) {
 	return Node(nodeID, name, tmp);
 }
 
-Weight read_edge(ifstream &f, uint &linenum, int &source,int &dest, int &edgeID) {
+Weight read_edge(ifstream &f, uint &linenum, int &source,int &dest, int &edgeID, vector<string> &transportTypes) {
 	string type, linetmp;
 	float price;
 	int minutes;
@@ -103,6 +103,9 @@ Weight read_edge(ifstream &f, uint &linenum, int &source,int &dest, int &edgeID)
 	while (linetmp.find(';') != -1) {
 		type = linetmp.substr(0, linetmp.find(';'));
 		linetmp.erase(0, linetmp.find(';') + 1);
+
+		if (std::find(transportTypes.begin(), transportTypes.end(), type) == transportTypes.end())
+			transportTypes.push_back(type);
 
 		price = stof(linetmp.substr(0, linetmp.find(';')));
 		linetmp.erase(0, linetmp.find(';') + 1);
