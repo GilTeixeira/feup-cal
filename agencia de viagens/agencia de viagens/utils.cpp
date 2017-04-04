@@ -21,15 +21,6 @@ void clrscr(void)
 	SetConsoleCursorPosition(hCon, upperLeftCorner);
 }
 
-//template<typename T>
-//bool check_duplicates(const vector<T> &v, T arg)
-//{
-//	for (auto x : v) {
-//		if (x->get_name() == arg->get_name() || x->get_code() == arg->get_code())
-//			return true;
-//	}
-//	return false;
-//}
 
 void read_line(ifstream & f, string & line, uint &linenum)
 {
@@ -37,7 +28,24 @@ void read_line(ifstream & f, string & line, uint &linenum)
 		++linenum;
 }
 
-Node read_node(ifstream &f, uint &linenum){
+Date read_date(string dateStr) {
+	string tmp;
+	size_t pos;
+	pos = dateStr.find('/');
+
+	if (pos == -1)
+		throw exception_or_error("Data nao tem o formato DD/MM/YY");
+
+	tmp = dateStr.substr(0, pos);
+	int day = stoi(tmp);
+	dateStr.erase(0, pos + 1);
+	int month = stoi(dateStr);
+
+
+	Date date(day,month);
+	return date;
+}
+Node read_node(ifstream &f, uint &linenum) {
 	string name, linetmp;
 	float price;
 
@@ -54,6 +62,24 @@ Node read_node(ifstream &f, uint &linenum){
 	//to add future changes for accomodation, provavelmente vai precisar de uma função propria
 
 	Accommodation tmp = Accommodation(price);
+
+	while (linetmp.find(';') != -1) {
+		string date1,date2;
+		double percentage;
+		date1 = linetmp.substr(0, linetmp.find(';'));
+		linetmp.erase(0, linetmp.find(';') + 1);
+
+
+		date2= linetmp.substr(0, linetmp.find(';'));
+		linetmp.erase(0, linetmp.find(';') + 1);
+
+		percentage = stod(linetmp.substr(0, linetmp.find(';')));
+		linetmp.erase(0, linetmp.find(';') + 1);
+
+		tmp.addDates(pair<Date, Date>(read_date(date1), read_date(date2)));
+		tmp.addPercentage(percentage);
+	}
+
 	return Node(nodeID, name, tmp);
 }
 

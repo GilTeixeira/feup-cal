@@ -37,6 +37,9 @@ public:
 	*@brief Gets the Date's day.
 	*@return Day.
 	*/
+
+	Date(int day, int month);
+
 	int getDay() const;
 
 	/**
@@ -55,6 +58,10 @@ public:
 	*/
 
 	bool operator==(const Date &date) const;
+
+	/*
+	*/
+	bool isLessDayMonth(const Date &date2)const;
 
 	/**
 	*@brief Prints the Date to a file in the format DD/MM/YYYY.

@@ -6,6 +6,7 @@
 class TravelAgency
 {
 	Graph<Node> travelAgencyGraph;
+
 public:
 	TravelAgency();
 	

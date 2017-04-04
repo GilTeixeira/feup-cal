@@ -49,6 +49,13 @@ Date::Date(string dateStr){
 		throw exception_or_error("Data nao tem o formato DD/MM/YY");
 }
 
+Date::Date(int day, int month)
+{
+	this->day = day;
+	this->month = month;
+	this->year = NULL;
+}
+
 int Date::getDay() const{
 	return day;
 }
@@ -87,6 +94,16 @@ bool operator<(const Date &date1, const Date &date2){
 
 bool Date::operator==(const Date &date) const {
 	return (day == date.getDay() && month == date.getMonth() && year == date.getYear());
+}
+
+bool Date::isLessDayMonth(const Date & date2) const
+{
+	if (month < date2.getMonth())
+		return true;
+	else if (month > date2.getMonth())
+		return false;
+
+	return day < date2.getDay();
 }
 
 

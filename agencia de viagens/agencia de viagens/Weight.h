@@ -8,9 +8,7 @@ using namespace std;
 
 class Weight
 {
-	
 	vector <TripInfo> allTrips;
-
 public:
 	Weight();
 	void addTripInfo(TripInfo tripInfo);

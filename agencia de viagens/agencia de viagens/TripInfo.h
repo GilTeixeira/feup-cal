@@ -19,3 +19,4 @@ public:
 	double getPrice() const;
 };
 
+

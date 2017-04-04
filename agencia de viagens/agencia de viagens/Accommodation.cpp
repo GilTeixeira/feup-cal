@@ -7,9 +7,23 @@ Accommodation::Accommodation(double price)
 	this->price = price;
 }
 
-double Accommodation::getPrice() const
+double Accommodation::getPrice(string dateStr) const
 {
-	return price;
+	Date dateToTravel = Date(dateStr);
+	for (size_t i = 0; i < datesPriceChange.size(); i++) {
+		if (dateToTravel.isLessDayMonth(datesPriceChange.at(i).second) && datesPriceChange.at(i).first.isLessDayMonth(dateToTravel))
+			return price*percentageToChange.at(i);
+	}
 
-	//por enquanto
+	return price;
+}
+
+void Accommodation::addDates(pair<Date, Date> datesToAdd)
+{
+	datesPriceChange.push_back(datesToAdd);
+}
+
+void Accommodation::addPercentage(double perc)
+{
+	percentageToChange.push_back(perc);
 }
