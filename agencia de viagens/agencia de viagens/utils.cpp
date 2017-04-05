@@ -69,7 +69,6 @@ Node read_node(ifstream &f, uint &linenum) {
 		date1 = linetmp.substr(0, linetmp.find(';'));
 		linetmp.erase(0, linetmp.find(';') + 1);
 
-
 		date2= linetmp.substr(0, linetmp.find(';'));
 		linetmp.erase(0, linetmp.find(';') + 1);
 
@@ -87,7 +86,7 @@ Weight read_edge(ifstream &f, uint &linenum, int &source,int &dest, int &edgeID,
 	string type, linetmp;
 	float price;
 	int minutes;
-	Weight edgeWeight= Weight();
+	Weight edgeWeight = Weight();
 
 	read_line(f, linetmp, linenum);
 
@@ -116,7 +115,7 @@ Weight read_edge(ifstream &f, uint &linenum, int &source,int &dest, int &edgeID,
 		edgeWeight.addTripInfo(TripInfo(type, minutes, price));
 	}
 
-	return  edgeWeight;
+	return edgeWeight;
 }
 
 double minutesToHours(const int &time_in_minutes)
@@ -127,4 +126,23 @@ double minutesToHours(const int &time_in_minutes)
 double minutesToDays(const int &time_in_minutes) 
 {
 	return (double)time_in_minutes / (1440.0);
+}
+
+string addDaysToDate(string & dateStr, unsigned int days)
+{
+	int day, month, year;
+	stringstream ss(dateStr);
+	ss >> day;
+	ss.ignore();
+	ss >> month;
+	ss.ignore();
+	ss >> year;
+	day = ((day + days) > maxmonthday(month) ? day + days - maxmonthday(month++) : day + days);
+	month %= 13 ? month = 1 : NULL;
+	ss.ignore(std::numeric_limits<std::streamsize>::max());
+	ss.clear();
+	dateStr.clear();
+	ss << day << '/' << month << '/' << year;
+	ss >> dateStr;
+	return dateStr;
 }

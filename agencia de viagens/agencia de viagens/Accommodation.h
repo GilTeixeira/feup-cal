@@ -1,4 +1,5 @@
-#pragma once
+#ifndef ACCOMMODATION_H_
+#define ACCOMMODATION_H_
 
 #include <vector>
 #include <map>
@@ -19,3 +20,4 @@ public:
 	void addPercentage(double perc);
 };
 
+#endif

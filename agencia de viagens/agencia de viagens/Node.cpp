@@ -20,3 +20,13 @@ bool Node::operator==(const Node & node) const
 {
 	return nodeID == node.getNodeID();
 }
+
+bool Node::operator!=(const Node & node) const
+{
+	return !(nodeID == node.getNodeID());
+}
+
+Accommodation const & Node::getAccommodation() const
+{
+	return accommodation;
+}

@@ -5,11 +5,12 @@
 * @brief Declaration of Date that handles all dates in the project.
 */
 
-#pragma once
-
+#ifndef DATE_H_
+#define DATE_H_
 
 #include <iostream>
 #include <fstream>
+#include <sstream>
 #include <string>
 #include <ctime>
 #include "exceptions.h"
@@ -94,3 +95,16 @@ public:
 	int getDayofTheWeek() const;
 };
 
+inline int maxmonthday(int month) {
+	switch (month)
+	{
+		case 4: case 6: case 9: case 11:
+			return 30;
+		case 2:
+			return 29;
+		default:
+			return 31;
+	}
+}
+
+#endif

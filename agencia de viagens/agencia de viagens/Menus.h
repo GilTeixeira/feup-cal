@@ -1,4 +1,5 @@
-#pragma once
+#ifndef MENUS_H_
+#define MENUS_H_
 
 /**
 * @file Menus.h
@@ -26,3 +27,5 @@ using namespace std;
 *@param ....
 */
 void mainMenu(TravelAgency &travelAgency);
+
+#endif

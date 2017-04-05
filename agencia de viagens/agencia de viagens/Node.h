@@ -1,4 +1,5 @@
-#pragma once
+#ifndef NODE_H_
+#define NODE_H_
 
 #include <string>
 #include "Accommodation.h"
@@ -13,6 +14,9 @@ public:
 	Node(int nodeID, string cityName, Accommodation accommodation);
 	int getNodeID() const;
 	string getCityName() const;
-	bool operator==(const Node &node) const;
+	Accommodation const & Node::getAccommodation() const;
+	bool operator==(const Node & node) const;
+	bool operator!=(const Node & node) const;
 };
 
+#endif

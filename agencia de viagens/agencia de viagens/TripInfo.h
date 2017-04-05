@@ -1,10 +1,10 @@
-#pragma once
+#ifndef TRIP_INFO_
+#define TRIP_INFO_
 
 #include <string>
 #include <map>
 
 using namespace std;
-
 
 class TripInfo
 {
@@ -19,4 +19,4 @@ public:
 	double getPrice() const;
 };
 
-
+#endif

@@ -4,7 +4,9 @@
 * @title Generic exception class
 * @brief Exception class used throughout the project.
 */
-#pragma once
+
+#ifndef EXCEPTIONS_H_
+#define EXCEPTIONS_H_
 
 #include <string>
 typedef unsigned int uint;
@@ -25,3 +27,5 @@ public:
 	*/
 	string get_reason() { return reason; };
 };
+
+#endif

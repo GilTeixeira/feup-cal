@@ -11,17 +11,6 @@ Date::Date(){
 	day = now.tm_mday;
 }
 
-int maxmonthday(int month){
-	switch (month){
-	case 4: case 6: case 9: case 11:
-		return 30;
-	case 2:
-		return 29;
-	default:
-		return 31;
-	}
-}
-
 Date::Date(string dateStr){
 	string tmp;
 	size_t pos;
@@ -105,8 +94,6 @@ bool Date::isLessDayMonth(const Date & date2) const
 
 	return day < date2.getDay();
 }
-
-
 
 int Date::getDayofTheWeek() const {
 	int k, m, C, Y, W;
