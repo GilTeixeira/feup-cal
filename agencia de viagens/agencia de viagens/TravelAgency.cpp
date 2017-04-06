@@ -52,3 +52,37 @@ TravelAgency::TravelAgency()
 	return;
 }
 
+
+void TravelAgency::displayGraph() {
+	/*
+
+	vector<Vertex *> nodesToDisplay = travelAgencyGraph.getVertexes();
+
+	typename vector<Vertex *>::const_iterator it = nodesToDisplay.begin();
+	typename vector<Vertex *>::const_iterator ite = nodesToDisplay.end();
+	
+
+	GraphViewer *gv = new GraphViewer(MAP_WIDTH, MAP_HEIGHT, false);
+	gv->setBackground("world.jpg");
+	gv->createWindow(MAP_WIDTH, MAP_HEIGHT);
+
+	gv->defineEdgeColor("blue");
+	gv->defineVertexColor("yellow");
+
+	gv->addNode(0, 30, 30);
+
+
+	//Display  Nodes
+	for (; it != ite; it++) {
+		pair<int, int> coordGraph = CoodinatesToMap((*it)->getInfo().getLongitude(), (*it)->getInfo().getLatitude());
+		gv->addNode((*it) ->getInfo().getNodeID(), coordGraph.first, coordGraph.second);
+	}
+
+	
+	//Display  Edges To Do
+
+	*/
+
+
+}
+

@@ -29,9 +29,10 @@ public:
 	std::vector<Node> bfs(Vertex * v) const;
 	int maxNewChildren(Vertex * v, Node & info) const;*/
 	/*
+	
+	int getNumVertex() const;*/
 	std::vector<Vertex *> getVertexes() const;
-	int getNumVertex() const;
-	*/
+	
 	Vertex * getVertex(Node const & info) const;
 	void resetIndegrees();
 /*	std::vector<Vertex *> getSources() const;

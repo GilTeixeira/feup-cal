@@ -11,6 +11,8 @@ class TravelAgency
 	vector<string> transportTypes;
 public:
 	TravelAgency();
+
+	void displayGraph();
 };
 
 #endif

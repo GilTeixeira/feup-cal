@@ -166,14 +166,16 @@ int Graph::maxNewChildren(Vertex * v, Node & info) const
 	}
 	return maxChildren;
 }
+int Graph::getNumVertex() const
+{
+return vertexes.size();
+}
+*/
 std::vector<Vertex *> Graph::getVertexes() const
 {
 	return vertexes;
 }
-int Graph::getNumVertex() const
-{
-	return vertexes.size();
-}*/
+
 Vertex * Graph::getVertex(Node const & info) const
 {
 	for (auto it = vertexes.begin(), it_e = vertexes.end(); it != it_e; ++it)

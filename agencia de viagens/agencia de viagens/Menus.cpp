@@ -12,7 +12,7 @@ void mainMenu(TravelAgency &travelAgency)
 		cout << TAB << "2 - " << endl;
 		cout << TAB << "3 - " << endl;
 		cout << TAB << "4 - " << endl;
-		cout << TAB << "5 - " << endl;
+		cout << TAB << "5 - Visualizar Grafo." << endl;
 		cout << TAB << "0 - Sair" << endl << endl; 
 
 		cout << "Escolha uma opcao: ";
@@ -44,7 +44,7 @@ void mainMenu(TravelAgency &travelAgency)
 			clrscr();
 
 			break;
-		case 5:
+		case 5: travelAgency.displayGraph();
 			clrscr();
 			
 			break;
