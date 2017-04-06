@@ -146,3 +146,14 @@ string addDaysToDate(string & dateStr, unsigned int days)
 	ss >> dateStr;
 	return dateStr;
 }
+
+
+pair<int, int> CoodinatesToMap(const double longitude, const double latitude) {
+	pair<int, int> coordInWindow;
+
+	coordInWindow.first = (int)((MAP_WIDTH / 360.0) * (180 + longitude));
+
+	coordInWindow.second = (int)((MAP_HEIGHT / 180.0) * (90 - latitude));
+
+	return coordInWindow;
+}

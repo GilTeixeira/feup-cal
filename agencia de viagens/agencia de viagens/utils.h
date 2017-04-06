@@ -25,6 +25,8 @@ typedef unsigned int uint;
 
 #define TAB	"\t"		
 #define BIG_TAB	"\t\t\t\t\t\t\t"
+#define MAP_WIDTH  1135
+#define MAP_HEIGHT  605
 /**
 @brief Clears console screen, for a clean look, expecially used in menus
 */
@@ -43,5 +45,7 @@ double minutesToHours(const int &time_in_minutes);
 double minutesToDays(const int &time_in_minutes);
 
 string addDaysToDate(string & dateStr, unsigned int days);
+
+pair<int, int> CoodinatesToMap(const double longitude, const double latitude);
 
 #endif
