@@ -1,10 +1,12 @@
 #include "Node.h"
 
-Node::Node(int nodeID, string cityName, Accommodation accommodation)
+Node::Node(int nodeID, string cityName, Accommodation accommodation, float longitude, float latitude)
 	: accommodation(accommodation)
 {
 	this->nodeID = nodeID;
 	this->cityName = cityName;
+	this->longitude = longitude;
+	this->latitude = latitude;
 }
 
 string Node::getCityName() const
@@ -32,12 +34,12 @@ Accommodation const & Node::getAccommodation() const
 	return accommodation;
 }
 
-double Node::getLatitude()
+float Node::getLatitude()
 {
 	return latitude;
 }
 
-double Node::getLongitude()
+float Node::getLongitude()
 {
 	return longitude;
 }

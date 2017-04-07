@@ -45,9 +45,10 @@ Date read_date(string dateStr) {
 	Date date(day,month);
 	return date;
 }
+
 Node read_node(ifstream &f, uint &linenum) {
 	string name, linetmp;
-	float price;
+	float price, longitude, latitude;
 
 	read_line(f, linetmp, linenum);
 
@@ -60,6 +61,13 @@ Node read_node(ifstream &f, uint &linenum) {
 	price = stof(linetmp.substr(0, linetmp.find(';')));
 	linetmp.erase(0, linetmp.find(';') + 1);
 	//to add future changes for accomodation, provavelmente vai precisar de uma função propria
+
+
+	longitude = stof(linetmp.substr(0, linetmp.find(';')));
+	linetmp.erase(0, linetmp.find(';') + 1);
+
+	latitude = stof(linetmp.substr(0, linetmp.find(';')));
+	linetmp.erase(0, linetmp.find(';') + 1);
 
 	Accommodation tmp = Accommodation(price);
 
@@ -79,7 +87,7 @@ Node read_node(ifstream &f, uint &linenum) {
 		tmp.addPercentage(percentage);
 	}
 
-	return Node(nodeID, name, tmp);
+	return Node(nodeID, name, tmp, longitude, latitude);
 }
 
 Weight read_edge(ifstream &f, uint &linenum, int &source,int &dest, int &edgeID, vector<string> &transportTypes) {
@@ -148,7 +156,7 @@ string addDaysToDate(string & dateStr, unsigned int days)
 }
 
 
-pair<int, int> CoodinatesToMap(const double longitude, const double latitude) {
+pair<int, int> CoodinatesToMap(const float longitude, const float latitude) {
 	pair<int, int> coordInWindow;
 
 	coordInWindow.first = (int)((MAP_WIDTH / 360.0) * (180 + longitude));

@@ -46,6 +46,6 @@ double minutesToDays(const int &time_in_minutes);
 
 string addDaysToDate(string & dateStr, unsigned int days);
 
-pair<int, int> CoodinatesToMap(const double longitude, const double latitude);
+pair<int, int> CoodinatesToMap(const float longitude, const float latitude);
 
 #endif

@@ -10,17 +10,17 @@ class Node
 	int nodeID;
 	string cityName;
 	Accommodation accommodation;
-	double longitude;
-	double latitude;
+	float longitude;
+	float latitude;
 public:
-	Node(int nodeID, string cityName, Accommodation accommodation);
+	Node(int nodeID, string cityName, Accommodation accommodation, float longitude, float latitude);
 	int getNodeID() const;
 	string getCityName() const;
 	Accommodation const & Node::getAccommodation() const;
 	bool operator==(const Node & node) const;
 	bool operator!=(const Node & node) const;
-	double getLongitude();
-	double getLatitude();
+	float getLongitude();
+	float getLatitude();
 };
 
 #endif

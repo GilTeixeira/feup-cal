@@ -4,7 +4,8 @@
 #include "utils.h"
 #include "exceptions.h"
 #include "Graph.h"
-//#include "graphviewer.h"
+#include "FichaJUNG.h"
+
 class TravelAgency
 {
 	Graph travelAgencyGraph;
@@ -13,6 +14,8 @@ public:
 	TravelAgency();
 
 	void displayGraph();
+
+	friend void graphviewer(TravelAgency& travelAgencyGraph);
 };
 
 #endif

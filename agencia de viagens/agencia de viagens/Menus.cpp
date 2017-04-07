@@ -44,7 +44,7 @@ void mainMenu(TravelAgency &travelAgency)
 			clrscr();
 
 			break;
-		case 5: travelAgency.displayGraph();
+		case 5: graphviewer(travelAgency);
 			clrscr();
 			
 			break;

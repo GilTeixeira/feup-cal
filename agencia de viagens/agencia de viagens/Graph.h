@@ -61,6 +61,7 @@ public:
 	bool removeEdgeTo(Vertex * dest);
 	Node getInfo() const;
 	int getIndegree() const;
+	std::vector<Edge> getEdges() const;
 	double getWDistance() const;
 
 	Vertex(Node info);
@@ -84,6 +85,7 @@ class Edge
 public:
 	int getID() const;
 	double getLowestWeight(string & dateStr, set<string> const & notWantedTypes);
+	Vertex * getDest() const;
 
 	Edge(Vertex * dest, Weight weight, int edgeID);
 private:

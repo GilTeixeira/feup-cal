@@ -480,6 +480,10 @@ Vertex::Vertex(Node info) : path(nullptr), info(info), indegree(0), distance(0),
 {
 }
 
+std::vector<Edge> Vertex::getEdges() const {
+	return edges;
+}
+
 int Edge::getID() const
 {
 	return ID;
@@ -488,6 +492,11 @@ double Edge::getLowestWeight(string & dateStr, set<string> const & notWantedType
 {
 	TripInfo trip = weight.getEdgeWeightPrice(dateStr, notWantedTypes, dest->getInfo().getAccommodation());
 	return trip.getPrice();
+}
+
+Vertex * Edge::getDest() const {
+	return dest;
+
 }
 Edge::Edge(Vertex * dest, Weight weight, int edgeID) : ID(edgeID), dest(dest), weight(weight)
 {

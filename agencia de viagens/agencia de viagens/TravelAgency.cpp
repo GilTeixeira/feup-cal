@@ -1,5 +1,6 @@
 #include "TravelAgency.h"
 
+
 TravelAgency::TravelAgency()
 {
 	uint linenum = 0;
@@ -39,8 +40,8 @@ TravelAgency::TravelAgency()
 	while (f.peek() != '#') {
 		int sourceID, destID, edgeID;
 		Weight tmpW = read_edge(f, linenum, sourceID, destID, edgeID,transportTypes);
-		Node source = Node(sourceID,"", Accommodation(0.0));
-		Node dest = Node(destID,"", Accommodation(0.0));
+		Node source = Node(sourceID,"", Accommodation(0.0),0,0);
+		Node dest = Node(destID,"", Accommodation(0.0),0,0);
 		travelAgencyGraph.addEdge(source, dest, tmpW, edgeID);
 	}
 
