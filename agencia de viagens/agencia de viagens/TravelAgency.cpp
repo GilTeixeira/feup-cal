@@ -54,36 +54,93 @@ TravelAgency::TravelAgency()
 }
 
 
-void TravelAgency::displayGraph() {
-	/*
-
-	vector<Vertex *> nodesToDisplay = travelAgencyGraph.getVertexes();
-
-	typename vector<Vertex *>::const_iterator it = nodesToDisplay.begin();
-	typename vector<Vertex *>::const_iterator ite = nodesToDisplay.end();
+void TravelAgency::TripToOneCity()
+{
+	unsigned int idSource, idDest, accommodationTime;
+	string data;
+	set <string> notWantedTypes;
 	
+	vector <Vertex *> allCitys = travelAgencyGraph.getVertexes();
+	if (allCitys.size() == 0) throw exception_or_error("O grafo não contém nenhuma informação verifique o ficheiro de texto.");
 
-	GraphViewer *gv = new GraphViewer(MAP_WIDTH, MAP_HEIGHT, false);
-	gv->setBackground("world.jpg");
-	gv->createWindow(MAP_WIDTH, MAP_HEIGHT);
+	cout << BIG_TAB << "Assitente de Viagem" << endl << endl;
 
-	gv->defineEdgeColor("blue");
-	gv->defineVertexColor("yellow");
+	for (Vertex * vert : allCitys) {
+		Node tmp = vert->getInfo();
+		cout << TAB << tmp.getNodeID() << " - " << tmp.getCityName()<< endl;
+	}
+	cout << endl;
+	
+	cout << "Insira o numero correpondente a cidade que pretende iniciar a viagem, 0 para cancelar: " << endl; 
+	cin >> idSource;
 
-	gv->addNode(0, 30, 30);
+	if (!cin.good()|| idSource>=(uint) allCitys.at(allCitys.size()-1)->getInfo().getNodeID()) {
+		cin.clear();
+		cin.ignore(numeric_limits<streamsize>::max(), '\n');
+		throw exception_or_error("O input nao e valido! Tente novamente.");
+	}
+	if (idSource == 0) return;
+	
+	cout << "Insira o numero correpondente a cidade que pretende visitar, 0 para cancelar: " << endl;
+	cin >> idDest;
 
-
-	//Display  Nodes
-	for (; it != ite; it++) {
-		pair<int, int> coordGraph = CoodinatesToMap((*it)->getInfo().getLongitude(), (*it)->getInfo().getLatitude());
-		gv->addNode((*it) ->getInfo().getNodeID(), coordGraph.first, coordGraph.second);
+	if (!cin.good() || idDest >= (uint)allCitys.at(allCitys.size() - 1)->getInfo().getNodeID()) {
+		cin.clear();
+		cin.ignore(numeric_limits<streamsize>::max(), '\n');
+		throw exception_or_error("O input nao e valido! Tente novamente.");
 	}
 
+	if (idDest == 0) return;
+
+	Vertex* source = travelAgencyGraph.getVertex(Node(idSource, "", 0, 0, 0));
+	Vertex* dest = travelAgencyGraph.getVertex(Node(idDest, "", 0, 0, 0));
+
+	cout << "Insira a data em que pretende iniciar a viagem: " << endl;
+	cin >> data;
+
+	cout << "Deseja adquirir alojamento por quanto tempo (0 se não pretender): " << endl;
+	cin >> accommodationTime;
+
+	if (!cin.good()) {
+		cin.clear();
+		cin.ignore(numeric_limits<streamsize>::max(), '\n');
+		throw exception_or_error("O input nao e valido! Tente novamente.");
+	}
 	
-	//Display  Edges To Do
+	notWantedTypes= load_notWantedTypes();
 
-	*/
 
+	//come o programa todo
+	travelAgencyGraph.getLowestPricePath(source->getInfo(), dest->getInfo(), data, notWantedTypes);
 
 }
+
+set<string> TravelAgency::load_notWantedTypes()
+{
+	int i = 1;
+	set<string> notWantedTypes;
+	for (string type : transportTypes){
+		cout << TAB << i << " - " << type;
+		i++;
+	}
+	cout << TAB << 0 << " - " << "Cancel";
+
+	while (true) {
+		uint option;
+		cout << "Insira o numero correpondente a um dos transportes que não quer utilizar(0 se não tiver preferências ou se já inseriu todos os que não deseja utilizar): " << endl;
+		cin >> option;
+
+		if (!cin.good() || option> transportTypes.size()) {
+			cin.clear();
+			cin.ignore(numeric_limits<streamsize>::max(), '\n');
+			throw exception_or_error("O input nao e valido! Tente novamente.");
+		}
+		if (option == 0)
+			return notWantedTypes;
+		notWantedTypes.insert(transportTypes.at(option - 1));
+	}
+}
+
+
+
 

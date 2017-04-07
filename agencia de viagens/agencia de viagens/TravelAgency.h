@@ -12,9 +12,8 @@ class TravelAgency
 	vector<string> transportTypes;
 public:
 	TravelAgency();
-
-	void displayGraph();
-
+	void TripToOneCity();
+	set<string> load_notWantedTypes();
 	friend void graphviewer(TravelAgency& travelAgencyGraph);
 };
 

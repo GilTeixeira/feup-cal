@@ -8,11 +8,9 @@ void mainMenu(TravelAgency &travelAgency)
 	while (!exit_program)
 	{
 		cout << BIG_TAB << "Menu Principal" << endl << endl;
-		cout << TAB << "1 - " << endl;
-		cout << TAB << "2 - " << endl;
-		cout << TAB << "3 - " << endl;
-		cout << TAB << "4 - " << endl;
-		cout << TAB << "5 - Visualizar Grafo." << endl;
+		cout << TAB << "1 - Viajar para um destino" << endl;
+		cout << TAB << "2 - Viajar para vários destinos" << endl;
+		cout << TAB << "3 - Visualizar Grafo." << endl;
 		cout << TAB << "0 - Sair" << endl << endl; 
 
 		cout << "Escolha uma opcao: ";
@@ -30,23 +28,15 @@ void mainMenu(TravelAgency &travelAgency)
 		switch (option) {
 		case 1:
 			clrscr();
-	
+			callTripToOneCity(travelAgency);
 			break;
 		case 2:
 			clrscr();
 
 			break;
-		case 3:
+		case 3: 
+			graphviewer(travelAgency);
 			clrscr();
-
-			break;
-		case 4:
-			clrscr();
-
-			break;
-		case 5: graphviewer(travelAgency);
-			clrscr();
-			
 			break;
 		case 0:
 			exit_program = true;
@@ -55,6 +45,18 @@ void mainMenu(TravelAgency &travelAgency)
 			cerr << "O input nao e valido. Tente novamente." << endl << endl;
 			system("PAUSE");
 		}
+		clrscr();
+	}
+	return;
+}
+
+void callTripToOneCity(TravelAgency &travelAgency) {
+	try{ 
+		travelAgency.TripToOneCity(); 
+	}
+	catch (exception_or_error x) {
+		cerr << endl << x.get_reason() << endl << endl;
+		system("PAUSE");
 		clrscr();
 	}
 	return;

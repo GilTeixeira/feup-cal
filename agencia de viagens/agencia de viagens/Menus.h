@@ -27,5 +27,6 @@ using namespace std;
 *@param ....
 */
 void mainMenu(TravelAgency &travelAgency);
+void callTripToOneCity(TravelAgency &travelAgency);
 
 #endif
