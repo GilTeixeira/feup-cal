@@ -74,7 +74,7 @@ void TravelAgency::TripToOneCity()
 	cout << "Insira o numero correpondente a cidade que pretende iniciar a viagem, 0 para cancelar: " << endl; 
 	cin >> idSource;
 
-	if (!cin.good()|| idSource>=(uint) allCitys.at(allCitys.size()-1)->getInfo().getNodeID()) {
+	if (!cin.good()|| idSource> (uint) allCitys.at(allCitys.size()-1)->getInfo().getNodeID()) {
 		cin.clear();
 		cin.ignore(numeric_limits<streamsize>::max(), '\n');
 		throw exception_or_error("O input nao e valido! Tente novamente.");
@@ -84,7 +84,7 @@ void TravelAgency::TripToOneCity()
 	cout << "Insira o numero correpondente a cidade que pretende visitar, 0 para cancelar: " << endl;
 	cin >> idDest;
 
-	if (!cin.good() || idDest >= (uint)allCitys.at(allCitys.size() - 1)->getInfo().getNodeID()) {
+	if (!cin.good() || idDest > (uint)allCitys.at(allCitys.size() - 1)->getInfo().getNodeID()) {
 		cin.clear();
 		cin.ignore(numeric_limits<streamsize>::max(), '\n');
 		throw exception_or_error("O input nao e valido! Tente novamente.");
@@ -109,9 +109,11 @@ void TravelAgency::TripToOneCity()
 	
 	notWantedTypes= load_notWantedTypes();
 
-
+	list <Vertex> shortestPath;
+	travelAgencyGraph.shortestPath((*source), (*dest), shortestPath, notWantedTypes);
+	return;
 	//come o programa todo
-	travelAgencyGraph.getLowestPricePath(source->getInfo(), dest->getInfo(), data, notWantedTypes);
+	/*travelAgencyGraph.getLowestPricePath(source->getInfo(), dest->getInfo(), data, notWantedTypes);*/
 
 }
 

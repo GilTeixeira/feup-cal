@@ -15,7 +15,7 @@ class Weight
 public:
 	Weight();
 	void addTripInfo(TripInfo tripInfo);
-	TripInfo Weight::getEdgeWeightPrice(string & dateStr, set<string> notWantedTypes, Accommodation destination);
+	TripInfo getEdgeWeightPrice(set<string> notWantedTypes);
 };
 
 #endif

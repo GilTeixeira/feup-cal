@@ -25,33 +25,35 @@ public:
 	bool addEdge(Node const & src, Node const & dest, Weight weight, int edgeID);
 	bool removeVertex(Node const & info);
 	bool removeEdge(Node const & src, Node const & dest);
-/*	std::vector<Node> dfs() const;
+	std::vector<Node> dfs() const;
 	std::vector<Node> bfs(Vertex * v) const;
-	int maxNewChildren(Vertex * v, Node & info) const;*/
-	/*
-	
-	int getNumVertex() const;*/
+	int maxNewChildren(Vertex * v, Node & info) const;
+	int getNumVertex() const;
 	std::vector<Vertex *> getVertexes() const;
 	
 	Vertex * getVertex(Node const & info) const;
 	void resetIndegrees();
-/*	std::vector<Vertex *> getSources() const;
+	std::vector<Vertex *> getSources() const;
 	int getNumCycles();
 	bool isDAG();
-	std::vector<Node> topologicalOrder();*/
-	std::vector<Node> getPath(Node const & src, Node const & dest);
+	std::vector<Node> topologicalOrder();
+	void Graph::getPath(Vertex vOrig, Vertex vDest, int *pathKeys, list<Vertex> &path);
 
 	void unweightedShortestPath(Node const & info);
-//	void dijkstraShortestPath(Node const & dest, string dateStr, set<string> const & notWantedTypes);
-	std::vector<Node> getLowestPricePath(Node const & src, Node const & dest, string dateStr, set<string> const & notWantedTypes);
+
+	double Graph::shortestPath(Vertex vOrig, Vertex vDest, list<Vertex> &shortPath, const set<string> &notWantedTypes);
+	void shortestPathLength(Vertex vOrig, bool *visited, int *pathKeys, double* dist,const set<string> &notWantedTypes);
+
 private:
 	int numCycles;
 	std::vector<Vertex *> vertexes;
-	/*
+	
 	void dfs(Vertex * v, std::vector<Node> & res) const;
 	void dfsVisit(Vertex * v);	
 	void dfsVisit();
-	void getPathTo(Vertex * dest, std::list<Node> & res);*/
+	void getPathTo(Vertex * dest, std::list<Node> & res);
+	int ** W;   
+	int ** P;   
 };
 
 class Vertex
@@ -84,7 +86,7 @@ class Edge
 {
 public:
 	int getID() const;
-	double getLowestWeight(string & dateStr, set<string> const & notWantedTypes);
+	double getLowestWeight(set<string> const & notWantedTypes);
 	Vertex * getDest() const;
 
 	Edge(Vertex * dest, Weight weight, int edgeID);

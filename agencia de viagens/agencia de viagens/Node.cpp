@@ -25,7 +25,7 @@ bool Node::operator==(const Node & node) const
 
 bool Node::operator!=(const Node & node) const
 {
-	return !(nodeID == node.getNodeID());
+	return nodeID != node.getNodeID();
 }
 
 

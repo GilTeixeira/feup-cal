@@ -86,7 +86,7 @@ bool Graph::removeEdge(Node const & src, Node const & dest)
 		return false;
 	}
 	return vS->removeEdgeTo(vD);
-}/*
+}
 std::vector<Node> Graph::dfs() const
 {
 	auto it = vertexes.begin(), it_e = vertexes.end();
@@ -170,7 +170,7 @@ int Graph::getNumVertex() const
 {
 return vertexes.size();
 }
-*/
+
 std::vector<Vertex *> Graph::getVertexes() const
 {
 	return vertexes;
@@ -186,7 +186,7 @@ Vertex * Graph::getVertex(Node const & info) const
 		}
 	}
 	return nullptr;
-}/*
+}
 void Graph::resetIndegrees()
 {
 	//colocar todos os indegree em 0;
@@ -230,7 +230,7 @@ bool Graph::isDAG()
 		return true;
 	}
 	return false;
-}*//*
+}
 std::vector<Node> Graph::topologicalOrder()
 {
 	//vetor com o resultado da ordenacao
@@ -285,26 +285,10 @@ std::vector<Node> Graph::topologicalOrder()
 	resetIndegrees();
 
 	return res;
-}*/
-std::vector<Node> Graph::getPath(Node const & src, Node const & dest)
-{
-	std::list<Node> buffer;
-	Vertex * vt = getVertex(dest);
-	buffer.push_front(vt->info);
-	while (vt->path->info != src)
-	{
-		vt = vt->path;
-		buffer.push_front(vt->info);
-	}
-	buffer.push_front(vt->path->info);
-	std::vector<Node> res;
-	while (!buffer.empty())
-	{
-		res.push_back(buffer.front());
-		buffer.pop_front();
-	}
-	return res;
 }
+
+	
+
 void Graph::unweightedShortestPath(Node const & info)
 {
 	for (auto it = vertexes.begin(), it_e = vertexes.end(); it != it_e; ++it)
@@ -333,7 +317,9 @@ void Graph::unweightedShortestPath(Node const & info)
 			}
 		}
 	}
-}/*
+}
+
+
 void Graph::dfs(Vertex * v, std::vector<Node> & res) const
 {
 	v->visited = true;
@@ -376,7 +362,7 @@ void Graph::dfsVisit()
 			dfsVisit(*it);
 		}
 	}
-}*//*
+}
 void Graph::getPathTo(Vertex * dest, std::list<Node> & res)
 {
 	res.push_back(dest->info);
@@ -384,69 +370,76 @@ void Graph::getPathTo(Vertex * dest, std::list<Node> & res)
 	{
 		getPathTo(dest->path, res);
 	}
-}*/
-std::vector<Node> Graph::getLowestPricePath(Node const & src, Node const & dest, string dateStr, set<string> const & notWantedTypes)
+}
+
+void Graph::getPath(Vertex vOrig, Vertex vDest, int *pathKeys, list<Vertex> &path)
 {
-	unweightedShortestPath(dest);
-	// ===== Custom Dijkstra Algorithm - Needs testing =====
-	for (auto it = vertexes.begin(), it_e = vertexes.end(); it != it_e; ++it)
-	{
-		(*it)->path = nullptr;
-		(*it)->weight_distance = INT_INFINITY;
-		(*it)->processing = false;
+
+	if (vOrig.getInfo() != vDest.getInfo()) {
+		path.push_back(vDest);
+		int vKey = vDest.getInfo().getNodeID()-1;
+		int prevVKey = pathKeys[vKey];
+		vDest = (*vertexes[prevVKey]);
+
+		getPath(vOrig, vDest, pathKeys, path);
+	}
+	else {
+		path.push_back(vOrig);
+	}
+}
+
+double Graph::shortestPath(Vertex vOrig, Vertex vDest, list<Vertex> &shortPath,const set<string> &notWantedTypes) {
+	int nverts = vertexes.size();
+	bool * visited= new bool[nverts]; 
+	int *pathKeys = new int[nverts];
+	double *dist = new double[nverts];
+
+
+	for (int i = 0; i < nverts; i++) {
+		dist[i] = numeric_limits<double>::max();
+		pathKeys[i] = -1;
+		visited[i] = false;
 	}
 
-	Vertex * vs = getVertex(src);
-	vs->weight_distance = 0;
+	shortestPathLength(vOrig, visited, pathKeys, dist, notWantedTypes);
 
-	std::vector<Vertex *> pqueue;
-	pqueue.push_back(vs);
+	double lengthPath = dist[vDest.getInfo().getNodeID()-1];
 
-	std::make_heap(pqueue.begin(), pqueue.end());
+	if (lengthPath != numeric_limits<double>::max()) {
+		getPath(vOrig, vDest, pathKeys, shortPath);
+		return lengthPath;
+	}
+	return 0;
+}
 
-	while (!pqueue.empty())
-	{
-		vs = pqueue.front();
-		pop_heap(pqueue.begin(), pqueue.end());
-		pqueue.pop_back();
-
-		bool distance_constraint = true;
-		bool checked = false;
-
-		for (auto it = vs->edges.begin(), it_e = vs->edges.end(); (it != it_e ? true : (checked ? false : (distance_constraint ? distance_constraint = false, it = vs->edges.begin(), true : false))); ++it)
-		{
-			Vertex * vd = it->dest;
-			string nextDateStr = dateStr;
-			double edge_weight;
-			if (!distance_constraint || vd->distance < vs->distance)
-			{
-				if (vs->weight_distance + (edge_weight = it->getLowestWeight(nextDateStr, notWantedTypes)) < vd->weight_distance)
-				{
-					checked = true;
-					dateStr = nextDateStr;
-					vd->weight_distance = vs->weight_distance + edge_weight;
-					vd->path = vs;
-
-					//se já estiver na lista, apenas a actualiza
-					if (!vd->processing)
-					{
-						vd->processing = true;
-						pqueue.push_back(vd);
-					}
-
-					make_heap(pqueue.begin(), pqueue.end(), [](Vertex * v1, Vertex * v2)
-					{
-						return v1->getWDistance() > v2->getWDistance();
-					});
-
-					if (!distance_constraint) break; // Is this necessary?
-				}
+void  Graph::shortestPathLength(Vertex vOrig, bool *visited,int *pathKeys, double* dist, const set<string> &notWantedTypes) {
+	int vkey = vOrig.getInfo().getNodeID()-1;
+	dist[vkey] = 0;
+ 	while (vkey != -1) {
+		vOrig = (*vertexes[vkey]);
+		visited[vkey] = true;
+		for (Edge edge : vOrig.getEdges()) {
+			Vertex vAdj =(*edge.getDest());
+			int vkeyAdj = edge.getDest()->getInfo().getNodeID()-1;
+			if (!visited[vkeyAdj] && dist[vkeyAdj] > dist[vkey] + edge.getLowestWeight(notWantedTypes)) {
+				dist[vkeyAdj] = dist[vkey] + edge.getLowestWeight(notWantedTypes);
+				pathKeys[vkeyAdj] = vkey;
+			}
+		}
+		double minDist = numeric_limits<double>::max();
+		vkey = -1;
+		for (int i = 0; i < vertexes.size(); i++) {
+			if (!visited[i] && dist[i] < minDist) {
+				minDist = dist[i];
+				vkey = i;
 			}
 		}
 	}
-	// =====
-	return getPath(src, dest);
 }
+
+
+
+
 
 void Vertex::addEdgeTo(Vertex * dest, Weight weight, int edgeID)
 {
@@ -488,9 +481,9 @@ int Edge::getID() const
 {
 	return ID;
 }
-double Edge::getLowestWeight(string & dateStr, set<string> const & notWantedTypes)
+double Edge::getLowestWeight( set<string> const & notWantedTypes)
 {
-	TripInfo trip = weight.getEdgeWeightPrice(dateStr, notWantedTypes, dest->getInfo().getAccommodation());
+	TripInfo trip = weight.getEdgeWeightPrice(notWantedTypes);
 	return trip.getPrice();
 }
 
