@@ -8,12 +8,14 @@
 
 class TravelAgency
 {
+private:
 	Graph travelAgencyGraph;
 	vector<string> transportTypes;
+	set<string> load_notWantedTypes();
+	void outPut_TripToOneCity(const list<Vertex> &shortestPath, uint accommodationTime,string dateStr,const set<string> &notWantedTypes);
 public:
 	TravelAgency();
 	void TripToOneCity();
-	set<string> load_notWantedTypes();
 	friend void graphviewer(TravelAgency& travelAgencyGraph);
 };
 

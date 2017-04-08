@@ -88,6 +88,8 @@ public:
 	int getID() const;
 	double getLowestWeight(set<string> const & notWantedTypes);
 	Vertex * getDest() const;
+	Weight  getWeight() const;
+
 
 	Edge(Vertex * dest, Weight weight, int edgeID);
 private:

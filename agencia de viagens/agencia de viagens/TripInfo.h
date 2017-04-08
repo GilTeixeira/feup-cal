@@ -17,6 +17,7 @@ public:
 	string getType() const;
 	unsigned int getTime() const;
 	double getPrice() const;
+	friend ostream& operator<<(ostream &out, const TripInfo &trip);
 };
 
 #endif

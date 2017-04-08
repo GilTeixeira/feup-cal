@@ -57,7 +57,7 @@ TravelAgency::TravelAgency()
 void TravelAgency::TripToOneCity()
 {
 	unsigned int idSource, idDest, accommodationTime;
-	string data;
+	string dateStr;
 	set <string> notWantedTypes;
 	
 	vector <Vertex *> allCitys = travelAgencyGraph.getVertexes();
@@ -96,7 +96,8 @@ void TravelAgency::TripToOneCity()
 	Vertex* dest = travelAgencyGraph.getVertex(Node(idDest, "", 0, 0, 0));
 
 	cout << "Insira a data em que pretende iniciar a viagem: " << endl;
-	cin >> data;
+	cin >> dateStr;
+
 
 	cout << "Deseja adquirir alojamento por quanto tempo (0 se não pretender): " << endl;
 	cin >> accommodationTime;
@@ -110,11 +111,11 @@ void TravelAgency::TripToOneCity()
 	notWantedTypes= load_notWantedTypes();
 
 	list <Vertex> shortestPath;
-	travelAgencyGraph.shortestPath((*source), (*dest), shortestPath, notWantedTypes);
+	if (travelAgencyGraph.shortestPath((*source), (*dest), shortestPath, notWantedTypes) == 0.0) {
+		throw exception_or_error("O destino que escolheu e impossivel de alcançar apartir da origem dada");
+	}
+	outPut_TripToOneCity(shortestPath, accommodationTime, dateStr, notWantedTypes);
 	return;
-	//come o programa todo
-	/*travelAgencyGraph.getLowestPricePath(source->getInfo(), dest->getInfo(), data, notWantedTypes);*/
-
 }
 
 set<string> TravelAgency::load_notWantedTypes()
@@ -122,14 +123,14 @@ set<string> TravelAgency::load_notWantedTypes()
 	int i = 1;
 	set<string> notWantedTypes;
 	for (string type : transportTypes){
-		cout << TAB << i << " - " << type;
+		cout << TAB << i << " - " << type << endl;
 		i++;
 	}
-	cout << TAB << 0 << " - " << "Cancel";
+	cout << TAB << 0 << " - " << "Cancelar" << endl << endl;
 
 	while (true) {
 		uint option;
-		cout << "Insira o numero correpondente a um dos transportes que não quer utilizar(0 se não tiver preferências ou se já inseriu todos os que não deseja utilizar): " << endl;
+		cout << "Insira o numero correpondente a um dos transportes que nao quer utilizar(0 se nao tiver preferencia ou se ja inseriu todos os que nao deseja utilizar): " << endl;
 		cin >> option;
 
 		if (!cin.good() || option> transportTypes.size()) {
@@ -140,6 +141,36 @@ set<string> TravelAgency::load_notWantedTypes()
 		if (option == 0)
 			return notWantedTypes;
 		notWantedTypes.insert(transportTypes.at(option - 1));
+	}
+}
+
+
+void TravelAgency::outPut_TripToOneCity(const list<Vertex> &shortestPath, uint accommodationTime, string dateStr, const set<string> &notWantedTypes)
+{
+	clrscr();
+
+	list<Vertex>::const_iterator it_i = shortestPath.end();
+	list<Vertex>::const_iterator it_f = shortestPath.begin();
+	it_i--;
+
+	cout << "A sua viagem foi calculada, aqui esta a sua informacao: " << endl << endl;
+	cout << "Tranportes a usar: " << endl << endl;
+	while (it_i != it_f) {
+		cout << "De: " << it_i->getInfo().getCityName() << endl;
+		vector<Edge> tmp= it_i->getEdges();
+		it_i--;
+		cout << "Para: " << it_i->getInfo().getCityName() << endl;
+		TripInfo tmpTrip("",0,0);
+
+		for (Edge edge : tmp) {
+			if (edge.getDest()->getInfo() == it_i->getInfo()) {
+				tmpTrip=edge.getWeight().getEdgeWeightPrice(notWantedTypes);
+				break;
+			}
+		}
+
+		cout << tmpTrip << endl;
+		system("Pause");
 	}
 }
 

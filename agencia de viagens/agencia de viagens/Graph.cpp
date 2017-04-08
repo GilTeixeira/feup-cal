@@ -166,6 +166,7 @@ int Graph::maxNewChildren(Vertex * v, Node & info) const
 	}
 	return maxChildren;
 }
+
 int Graph::getNumVertex() const
 {
 return vertexes.size();
@@ -389,7 +390,7 @@ void Graph::getPath(Vertex vOrig, Vertex vDest, int *pathKeys, list<Vertex> &pat
 }
 
 double Graph::shortestPath(Vertex vOrig, Vertex vDest, list<Vertex> &shortPath,const set<string> &notWantedTypes) {
-	int nverts = vertexes.size();
+	size_t nverts = vertexes.size();
 	bool * visited= new bool[nverts]; 
 	int *pathKeys = new int[nverts];
 	double *dist = new double[nverts];
@@ -490,6 +491,10 @@ double Edge::getLowestWeight( set<string> const & notWantedTypes)
 Vertex * Edge::getDest() const {
 	return dest;
 
+}
+Weight Edge::getWeight() const
+{
+	return weight;
 }
 Edge::Edge(Vertex * dest, Weight weight, int edgeID) : ID(edgeID), dest(dest), weight(weight)
 {
