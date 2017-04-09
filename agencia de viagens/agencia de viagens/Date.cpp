@@ -34,7 +34,7 @@ Date::Date(string dateStr){
 	
 	Date currentyear;
 
-	if (month > 12 || day > maxmonthday(month)||year<1970||year>currentyear.getYear())
+	if (month > 12 || day > maxmonthday(month)||year<1970)
 		throw exception_or_error("Data nao tem o formato DD/MM/YY");
 }
 

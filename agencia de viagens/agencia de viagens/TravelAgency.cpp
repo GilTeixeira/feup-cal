@@ -97,7 +97,7 @@ void TravelAgency::TripToOneCity()
 
 	cout << "Insira a data em que pretende iniciar a viagem: " << endl;
 	cin >> dateStr;
-
+	Date date = Date(dateStr);
 
 	cout << "Deseja adquirir alojamento por quanto tempo (0 se não pretender): " << endl;
 	cin >> accommodationTime;
@@ -170,8 +170,24 @@ void TravelAgency::outPut_TripToOneCity(const list<Vertex> &shortestPath, uint a
 		}
 
 		cout << tmpTrip << endl;
-		system("Pause");
 	}
+
+	cout << endl;
+	if (accommodationTime == 0) {
+		system("Pause");
+		clrscr();
+		return;
+	}
+
+	cout << "Preco de alojamento para " << accommodationTime << " dias apartir do dia " 
+		<< dateStr << ": ";
+	cout <<  std::fixed << std::setprecision(2) 
+		<< accommodationTime*it_f->getInfo().getAccommodation().getPrice(dateStr) 
+		<< "€"<< endl << endl;
+
+	system("Pause");
+	clrscr();
+	return;
 }
 
 
