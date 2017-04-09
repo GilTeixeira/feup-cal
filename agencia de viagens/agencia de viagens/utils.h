@@ -32,7 +32,7 @@ typedef unsigned int uint;
 */
 void clrscr();
 
-//template<typename T>bool check_duplicates(const vector<T> &v,T arg);
+
 
 void read_line(ifstream & f, string & line, uint &linenum);
 
@@ -44,7 +44,7 @@ double minutesToHours(const int &time_in_minutes);
 
 double minutesToDays(const int &time_in_minutes);
 
-string addDaysToDate(string & dateStr, unsigned int days);
+void addDaysToDate(string & dateStr, unsigned int days);
 
 pair<int, int> CoodinatesToMap(const float longitude, const float latitude);
 

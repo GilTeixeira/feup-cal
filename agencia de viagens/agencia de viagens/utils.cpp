@@ -136,8 +136,9 @@ double minutesToDays(const int &time_in_minutes)
 	return (double)time_in_minutes / (1440.0);
 }
 
-string addDaysToDate(string & dateStr, unsigned int days)
+void addDaysToDate(string & dateStr, unsigned int days)
 {
+	if (days == 0) return;
 	int day, month, year;
 	stringstream ss(dateStr);
 	ss >> day;
@@ -145,14 +146,22 @@ string addDaysToDate(string & dateStr, unsigned int days)
 	ss >> month;
 	ss.ignore();
 	ss >> year;
-	day = ((day + days) > maxmonthday(month) ? day + days - maxmonthday(month++) : day + days);
-	month %= 13 ? month = 1 : NULL;
-	ss.ignore(std::numeric_limits<std::streamsize>::max());
-	ss.clear();
+	while (days != 0) {
+		days--;
+		if (day < maxmonthday(month))
+			day++;
+		else if (month < 12) {
+			month++;
+			day = 1;
+		}
+		else { 
+			year++; 
+			month=1;
+			day = 1;
+		}
+	}
 	dateStr.clear();
-	ss << day << '/' << month << '/' << year;
-	ss >> dateStr;
-	return dateStr;
+	dateStr = to_string(day) + "/" + to_string(month) + "/" + to_string(year);
 }
 
 

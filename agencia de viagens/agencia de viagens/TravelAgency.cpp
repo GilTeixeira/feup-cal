@@ -114,9 +114,15 @@ void TravelAgency::TripToOneCity()
 	if (travelAgencyGraph.shortestPath((*source), (*dest), shortestPath, notWantedTypes) == 0.0) {
 		throw exception_or_error("O destino que escolheu e impossivel de alcançar apartir da origem dada");
 	}
+	clrscr();
+	cout << "A sua viagem foi calculada, aqui esta a sua informacao: " << endl << endl;
 	outPut_TripToOneCity(shortestPath, accommodationTime, dateStr, notWantedTypes);
+	system("Pause");
+	clrscr();
 	return;
 }
+
+
 
 set<string> TravelAgency::load_notWantedTypes()
 {
@@ -147,13 +153,12 @@ set<string> TravelAgency::load_notWantedTypes()
 
 void TravelAgency::outPut_TripToOneCity(const list<Vertex> &shortestPath, uint accommodationTime, string dateStr, const set<string> &notWantedTypes)
 {
-	clrscr();
 
 	list<Vertex>::const_iterator it_i = shortestPath.end();
 	list<Vertex>::const_iterator it_f = shortestPath.begin();
 	it_i--;
 
-	cout << "A sua viagem foi calculada, aqui esta a sua informacao: " << endl << endl;
+	
 	cout << "Tranportes a usar: " << endl << endl;
 	while (it_i != it_f) {
 		cout << "De: " << it_i->getInfo().getCityName() << endl;
@@ -174,22 +179,109 @@ void TravelAgency::outPut_TripToOneCity(const list<Vertex> &shortestPath, uint a
 
 	cout << endl;
 	if (accommodationTime == 0) {
-		system("Pause");
-		clrscr();
 		return;
 	}
 
 	cout << "Preco de alojamento para " << accommodationTime << " dias apartir do dia " 
 		<< dateStr << ": ";
 	cout <<  std::fixed << std::setprecision(2) 
-		<< accommodationTime*it_f->getInfo().getAccommodation().getPrice(dateStr) 
-		<< "€"<< endl << endl;
+		<< accommodationTime*it_f->getInfo().getAccommodation().getPrice(dateStr) << endl << endl;
 
-	system("Pause");
+	return;
+}
+
+void TravelAgency::CustomTrip()
+{
+
+	unsigned int idSource, idDest, accommodationTime;
+	vector<Vertex> visited;
+	vector<Vertex> toVisit;
+	map<string,uint> accomTime;
+
+	set <string> notWantedTypes;
+	string dateStr;
+
+
+	vector <Vertex *> allCitys = travelAgencyGraph.getVertexes();
+	if (allCitys.size() == 0) throw exception_or_error("O grafo não contém nenhuma informação verifique o ficheiro de texto.");
+	
+	cout << BIG_TAB << "Assitente de Viagem" << endl << endl;
+
+	for (Vertex * vert : allCitys) {
+		Node tmp = vert->getInfo();
+		cout << TAB << tmp.getNodeID() << " - " << tmp.getCityName() << endl;
+	}
+	cout << endl;
+
+	cout << "Insira o numero correpondente a cidade que pretende iniciar a viagem, 0 para cancelar: " << endl;
+	cin >> idSource;
+
+	if (!cin.good() || idSource> (uint)allCitys.at(allCitys.size() - 1)->getInfo().getNodeID()) {
+		cin.clear();
+		cin.ignore(numeric_limits<streamsize>::max(), '\n');
+		throw exception_or_error("O input nao e valido! Tente novamente.");
+	}
+	if (idSource == 0) return;
+
+	Vertex* source = travelAgencyGraph.getVertex(Node(idSource, "", 0, 0, 0));
+	visited.push_back((*source));
+
+	while (true) {
+		cout << "Insira o numero correpondente a uma das cidades que pretende visitar, 0 se ja inseriu todas as pretendidadas: " << endl;
+		cin >> idDest;
+
+		if (!cin.good() || idDest > (uint)allCitys.at(allCitys.size() - 1)->getInfo().getNodeID()) {
+			cin.clear();
+			cin.ignore(numeric_limits<streamsize>::max(), '\n');
+			throw exception_or_error("O input nao e valido! Tente novamente.");
+		}
+
+		if (idDest == 0) break;
+
+		cout << "Deseja adquirir alojamento por quanto tempo nesta cidade (0 se não pretender): " << endl;
+		cin >> accommodationTime;
+
+		if (!cin.good()) {
+			cin.clear();
+			cin.ignore(numeric_limits<streamsize>::max(), '\n');
+			throw exception_or_error("O input nao e valido! Tente novamente.");
+		}
+
+		Vertex* dest = travelAgencyGraph.getVertex(Node(idDest, "", 0, 0, 0));
+		toVisit.push_back((*dest));
+		accomTime.insert(make_pair(dest->getInfo().getCityName(), accommodationTime));
+	}
+
+	if (toVisit.size() == 0) return;
+
+	cout << "Insira a data em que pretende iniciar a viagem: " << endl;
+	cin >> dateStr;
+	Date date = Date(dateStr);
+
+	notWantedTypes = load_notWantedTypes();
+	vector < list <Vertex> > shortestPath;
+	travelAgencyGraph.customTripAlgorithm(visited, toVisit,shortestPath, notWantedTypes);
+
+	clrscr();
+	cout << BIG_TAB << "Calculamos a sua viagem aqui estao as informacoes: " << endl << endl << endl;
+	outPut_CustomTrip(shortestPath, accomTime, dateStr, notWantedTypes);
+	
+	system("PAUSE");
 	clrscr();
 	return;
 }
 
-
+void TravelAgency::outPut_CustomTrip(const vector < list<Vertex>> &shortestPath, const map<string, uint> &accomTime, string &dateStr, const set <string> &notWantedTypes) {
+	int i=1;
+	for (list<Vertex> list : shortestPath) {
+		cout << TAB << i << "ª Viagem: " << endl << endl;
+		map<string,uint>::const_iterator it=accomTime.find(list.front().getInfo().getCityName());
+		uint accommodationTime = it->second;
+		outPut_TripToOneCity(list, it->second, dateStr, notWantedTypes);
+		addDaysToDate(dateStr, it->second);
+		i++;
+	}
+	return;
+}
 
 

@@ -25,8 +25,8 @@ double TripInfo::getPrice() const
 
 ostream& operator<<(ostream& out, const TripInfo & trip) {
 	out << "Tipo de transporte: " << trip.type << endl;
-	out << std::fixed << std::setprecision(2) <<"Preco: " << trip.price_in_euros << "€" << endl;
-	out << "Tempo de viagem: " << trip.time_in_minutes << " min" << endl;
+	out << std::fixed << std::setprecision(2) <<"Preco: " << trip.price_in_euros << endl;
+	out << "Tempo de viagem: " << trip.time_in_minutes << endl;
 	return out;
 }
 

@@ -9,7 +9,7 @@ void mainMenu(TravelAgency &travelAgency)
 	{
 		cout << BIG_TAB << "Menu Principal" << endl << endl;
 		cout << TAB << "1 - Viajar para um destino" << endl;
-		cout << TAB << "2 - Viajar para vários destinos" << endl;
+		cout << TAB << "2 - Viajar para varios destinos" << endl;
 		cout << TAB << "3 - Visualizar Grafo." << endl;
 		cout << TAB << "0 - Sair" << endl << endl; 
 
@@ -32,7 +32,7 @@ void mainMenu(TravelAgency &travelAgency)
 			break;
 		case 2:
 			clrscr();
-
+			travelAgency.CustomTrip();
 			break;
 		case 3: 
 			graphviewer(travelAgency);

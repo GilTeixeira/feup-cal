@@ -37,13 +37,13 @@ public:
 	int getNumCycles();
 	bool isDAG();
 	std::vector<Node> topologicalOrder();
-	void Graph::getPath(Vertex vOrig, Vertex vDest, int *pathKeys, list<Vertex> &path);
+	void getPath(Vertex vOrig, Vertex vDest, int *pathKeys, list<Vertex> &path);
 
 	void unweightedShortestPath(Node const & info);
 
-	double Graph::shortestPath(Vertex vOrig, Vertex vDest, list<Vertex> &shortPath, const set<string> &notWantedTypes);
+	double shortestPath(Vertex vOrig, Vertex vDest, list<Vertex> &shortPath, const set<string> &notWantedTypes);
 	void shortestPathLength(Vertex vOrig, bool *visited, int *pathKeys, double* dist,const set<string> &notWantedTypes);
-
+	void customTripAlgorithm(vector<Vertex> &visited, vector<Vertex> &toVisit, vector < list <Vertex> > &shortestPath, const set<string> &notWantedTypes);
 private:
 	int numCycles;
 	std::vector<Vertex *> vertexes;

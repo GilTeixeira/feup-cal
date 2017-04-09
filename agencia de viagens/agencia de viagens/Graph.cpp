@@ -442,6 +442,7 @@ void  Graph::shortestPathLength(Vertex vOrig, bool *visited,int *pathKeys, doubl
 
 
 
+
 void Vertex::addEdgeTo(Vertex * dest, Weight weight, int edgeID)
 {
 	edges.emplace_back(dest, weight, edgeID);
@@ -498,4 +499,35 @@ Weight Edge::getWeight() const
 }
 Edge::Edge(Vertex * dest, Weight weight, int edgeID) : ID(edgeID), dest(dest), weight(weight)
 {
+}
+
+
+void Graph::customTripAlgorithm(vector<Vertex>& visited, vector<Vertex>& toVisit,
+	vector<list<Vertex>>& shortestPathList, const set<string>& notWantedTypes)
+{
+	while (!toVisit.empty()) {
+		size_t posToVisited;
+		list<Vertex> shortPath;
+		list<Vertex> bestPath;
+		double bestprice = numeric_limits<double>::max();
+		for (size_t i = 0; i < toVisit.size(); i++) {
+			shortPath.clear();
+			Vertex visit = toVisit.at(i);
+
+			double currentprice = shortestPath(visited.at(visited.size() - 1), visit
+				, shortPath, notWantedTypes);
+
+			if (currentprice == 0) throw exception_or_error("Os nossos transportes nao tem maneira de alcancar um dos destinos que escolheu");
+
+			if (bestprice > currentprice) {
+				bestprice = currentprice;
+				bestPath = shortPath;
+				posToVisited = i;
+			}
+		}
+		shortestPathList.push_back(bestPath);
+		visited.push_back(toVisit.at(posToVisited));
+		toVisit.erase(toVisit.begin() + posToVisited);
+	}
+	return;
 }
