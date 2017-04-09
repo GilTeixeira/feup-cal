@@ -46,7 +46,7 @@ public:
 	*/
 	TravelAgency();
 	/**
-	*@brief User inputs necessary to call the shortes path beetween 2 citys
+	*@brief User inputs necessary to call the shortest path beetween 2 citys
 	*/
 	void TripToOneCity();
 	/**

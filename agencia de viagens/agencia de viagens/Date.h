@@ -107,6 +107,7 @@ public:
 *@param month A momth.
 *@return The number of day of the month.
 */
+
 inline int maxmonthday(int month) {
 	switch (month)
 	{
