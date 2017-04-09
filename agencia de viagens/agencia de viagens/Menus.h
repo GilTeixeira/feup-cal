@@ -3,9 +3,8 @@
 
 /**
 * @file Menus.h
-* @author AEDA T4GE
 * @title Menus
-* @brief Menu functions.
+* @brief Some Menu functions.
 */
 #pragma once
 #include <iostream>
@@ -23,11 +22,21 @@
 using namespace std;
 
 /**
-*@brief Main Menu.
-*@param ....
+*@brief Displays the Main Menu.
+*@param travelAgency The Travel Agency
 */
 void mainMenu(TravelAgency &travelAgency);
+
+/**
+*@brief Calculates the best Trip to a single city
+*@param travelAgency The Travel Agency
+*/
 void callTripToOneCity(TravelAgency &travelAgency);
+
+/**
+*@brief Calculates the best Trip to multiple cities
+*@param travelAgency The Travel Agency
+*/
 void callCustomTrip(TravelAgency &travelAgency);
 
 #endif

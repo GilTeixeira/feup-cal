@@ -1,6 +1,5 @@
 /**
 * @file exceptions.h
-* @author 
 * @title Generic exception class
 * @brief Exception class used throughout the project.
 */

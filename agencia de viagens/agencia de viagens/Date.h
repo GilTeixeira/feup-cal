@@ -1,6 +1,5 @@
 /**
 * @file Date.h
-* @author 
 * @title Class Date
 * @brief Declaration of Date that handles all dates in the project.
 */
@@ -35,11 +34,15 @@ public:
 	Date(string dateStr); 
 
 	/**
-	*@brief Gets the Date's day.
-	*@return Day.
+	*@brief Creates a Date with a day and month
 	*/
 
 	Date(int day, int month);
+
+	/**
+	*@brief Gets the Date's day.
+	*@return Day.
+	*/	
 
 	int getDay() const;
 
@@ -56,11 +59,15 @@ public:
 	int getYear() const;
 
 	/**
+	*@brief Compares two dates
+	*@param date The date to be compared
 	*/
 
 	bool operator==(const Date &date) const;
 
 	/*
+	*@brief Compares the day and month of two dates
+	*@param date2 The date to be compared
 	*/
 	bool isLessDayMonth(const Date &date2)const;
 
@@ -89,12 +96,17 @@ public:
 
 	/**
 	*Disparate variation of the Gauss's Algorithm that determinates the Day of the Week.
-	*@brief Determination of the day of the week
-	*@return The day of the week(0 = Sunday, ..., 6 = Saturday)
+	*@brief Determination of the day of the week.
+	*@return The day of the week(0 = Sunday, ..., 6 = Saturday).
 	*/
 	int getDayofTheWeek() const;
 };
 
+/**
+*@brief Determination of the number of days of a month.
+*@param month A momth.
+*@return The number of day of the month.
+*/
 inline int maxmonthday(int month) {
 	switch (month)
 	{
