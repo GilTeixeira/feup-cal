@@ -36,9 +36,30 @@ private:
 class Vertex
 {
 public:
+	/**
+	*@brief  Adds Edge to Another Node.
+	*@param dest The Vertex to which the Edge is pointed.
+	*@param weight The Weight of the Edge.
+	*@param edgeID Edge's ID.
+	*/
 	void addEdgeTo(Vertex * dest, Weight weight, int edgeID);
+
+	/**
+	*@brief Gets Node's Information.
+	*@return Node's Information.
+	*/
 	Node getInfo() const;
+
+	/**
+	*@brief Gets All Edges from this Vertex.
+	*@return All Edges from this Vertex.
+	*/
 	std::vector<Edge> getEdges() const;
+
+	/**
+	*@brief  Creates an Vertex.
+	*@param info The Vertex information.
+	*/
 	Vertex(Node info);
 private:
 	Node info;
