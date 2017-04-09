@@ -91,6 +91,7 @@ void TravelAgency::TripToOneCity()
 	}
 
 	if (idDest == 0) return;
+	if (idSource == idDest) throw ("Escolheu a mesma cidade para a origem e o seu destino!");
 
 	Vertex* source = travelAgencyGraph.getVertex(Node(idSource, "", 0, 0, 0));
 	Vertex* dest = travelAgencyGraph.getVertex(Node(idDest, "", 0, 0, 0));
@@ -102,7 +103,7 @@ void TravelAgency::TripToOneCity()
 	cout << "Deseja adquirir alojamento por quanto tempo (0 se não pretender): " << endl;
 	cin >> accommodationTime;
 
-	if (!cin.good()) {
+	if (!cin.good()||accommodationTime>60) {
 		cin.clear();
 		cin.ignore(numeric_limits<streamsize>::max(), '\n');
 		throw exception_or_error("O input nao e valido! Tente novamente.");
@@ -237,11 +238,17 @@ void TravelAgency::CustomTrip()
 		}
 
 		if (idDest == 0) break;
+		if (idSource == idDest) throw ("Escolheu a mesma cidade para a origem e para um dos seus destinos!");
+		
+		for (Vertex checkingDup: toVisit) {
+			if (checkingDup.getInfo().getNodeID() == idDest) 
+				throw ("Nao pode escolher o mesmo destino mais que uma vez!");
+		}
 
 		cout << "Deseja adquirir alojamento por quanto tempo nesta cidade (0 se não pretender): " << endl;
 		cin >> accommodationTime;
 
-		if (!cin.good()) {
+		if (!cin.good()||accommodationTime>60) {
 			cin.clear();
 			cin.ignore(numeric_limits<streamsize>::max(), '\n');
 			throw exception_or_error("O input nao e valido! Tente novamente.");
