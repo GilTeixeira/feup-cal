@@ -50,12 +50,37 @@ private:
 class Edge
 {
 public:
+	/**
+	*@brief Gets Edge's ID.
+	*@return Edge's ID.
+	*/
 	int getID() const;
+
+	/**
+	*@brief Gets Trip with the lowest the price, which doesnt include not Wanted types.
+	*@param notWantedTypes Types of tranportation to be ignored.
+	*@return The trip with the lowest price.
+	*/
 	double getLowestWeight(set<string> const & notWantedTypes);
+
+	/**
+	*@brief Gets Edge's Destination.
+	*@return Edge's ID.
+	*/
 	Vertex * getDest() const;
+
+	/**
+	*@brief Gets Edge's Weight.
+	*@return Edge's ID.
+	*/
 	Weight  getWeight() const;
 
-
+	/**
+	*@brief  Creates an Edge with pointer to Node, Weight and edgeID as parameters.
+	*@param dest The Vertex  to which the Edges is pointed.
+	*@param weight The Weight of the Edge.
+	*@param edgeID Edge's ID.
+	*/
 	Edge(Vertex * dest, Weight weight, int edgeID);
 private:
 	int ID;
