@@ -29,17 +29,17 @@ bool Node::operator!=(const Node & node) const
 }
 
 
-Accommodation const & Node::getAccommodation() const
+Accommodation Node::getAccommodation() const
 {
 	return accommodation;
 }
 
-float Node::getLatitude()
+float Node::getLatitude() const 
 {
 	return latitude;
 }
 
-float Node::getLongitude()
+float Node::getLongitude() const
 {
 	return longitude;
 }

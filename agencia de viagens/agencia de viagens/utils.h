@@ -32,8 +32,6 @@ typedef unsigned int uint;
 */
 void clrscr();
 
-
-
 void read_line(ifstream & f, string & line, uint &linenum);
 
 Node read_node(ifstream &f, uint &linenum);

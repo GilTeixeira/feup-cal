@@ -32,7 +32,7 @@ void mainMenu(TravelAgency &travelAgency)
 			break;
 		case 2:
 			clrscr();
-			travelAgency.CustomTrip();
+			callCustomTrip(travelAgency);
 			break;
 		case 3: 
 			graphviewer(travelAgency);
@@ -53,6 +53,18 @@ void mainMenu(TravelAgency &travelAgency)
 void callTripToOneCity(TravelAgency &travelAgency) {
 	try{ 
 		travelAgency.TripToOneCity(); 
+	}
+	catch (exception_or_error x) {
+		cerr << endl << x.get_reason() << endl << endl;
+		system("PAUSE");
+		clrscr();
+	}
+	return;
+}
+
+void callCustomTrip(TravelAgency &travelAgency) {
+	try {
+		travelAgency.CustomTrip();
 	}
 	catch (exception_or_error x) {
 		cerr << endl << x.get_reason() << endl << endl;

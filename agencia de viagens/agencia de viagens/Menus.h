@@ -28,5 +28,6 @@ using namespace std;
 */
 void mainMenu(TravelAgency &travelAgency);
 void callTripToOneCity(TravelAgency &travelAgency);
+void callCustomTrip(TravelAgency &travelAgency);
 
 #endif
