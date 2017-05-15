@@ -24,6 +24,7 @@ public:
 	*@param price The base price.
 	*/
 	Accommodation(double price);
+	Accommodation();
 
 	/**
 	*@brief Gets price.

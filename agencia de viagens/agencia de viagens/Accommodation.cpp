@@ -19,6 +19,11 @@ Accommodation::Accommodation(double price)
 	this->price = price;
 }
 
+Accommodation::Accommodation()
+{
+	price = 0.0;
+}
+
 double Accommodation::getPrice(string dateStr) const
 {
 	Date dateToTravel = Date(dateStr);

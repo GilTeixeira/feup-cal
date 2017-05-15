@@ -15,6 +15,7 @@ class Node
 {
 	int nodeID;
 	string cityName;
+	vector <string> monuments;
 	Accommodation accommodation;
 	float longitude;
 	float latitude;
@@ -27,8 +28,9 @@ public:
 	*@param longitude
 	*@param latitude
 	*/
-	Node(int nodeID, string cityName, Accommodation accommodation, float longitude, float latitude);
+	Node(int nodeID, string cityName, vector <string> monuments, Accommodation accommodation, float longitude, float latitude);
 
+	Node(int nodeID);
 	/**
 	*@brief Gets the Node's ID.
 	*@return nodeID.
@@ -51,6 +53,8 @@ public:
 	*@brief Compares two dates
 	*@param date The date to be compared
 	*/
+
+	vector<string> getMonuments() const;
 	bool operator==(const Node & node) const;
 
 	/**

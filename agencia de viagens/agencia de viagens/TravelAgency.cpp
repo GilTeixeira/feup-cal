@@ -40,8 +40,8 @@ TravelAgency::TravelAgency()
 	while (f.peek() != '#') {
 		int sourceID, destID, edgeID;
 		Weight tmpW = read_edge(f, linenum, sourceID, destID, edgeID,transportTypes);
-		Node source = Node(sourceID,"", Accommodation(0.0),0,0);
-		Node dest = Node(destID,"", Accommodation(0.0),0,0);
+		Node source = Node(sourceID);
+		Node dest = Node(destID);
 		travelAgencyGraph.addEdge(source, dest, tmpW, edgeID);
 	}
 
@@ -93,8 +93,9 @@ void TravelAgency::TripToOneCity()
 	if (idDest == 0) return;
 	if (idSource == idDest) throw ("Escolheu a mesma cidade para a origem e o seu destino!");
 
-	Vertex* source = travelAgencyGraph.getVertex(Node(idSource, "", 0, 0, 0));
-	Vertex* dest = travelAgencyGraph.getVertex(Node(idDest, "", 0, 0, 0));
+
+	Vertex* source = travelAgencyGraph.getVertex(Node(idSource));
+	Vertex* dest = travelAgencyGraph.getVertex(Node(idDest));
 
 	cout << "Insira a data em que pretende iniciar a viagem: " << endl;
 	cin >> dateStr;
@@ -224,7 +225,8 @@ void TravelAgency::CustomTrip()
 	}
 	if (idSource == 0) return;
 
-	Vertex* source = travelAgencyGraph.getVertex(Node(idSource, "", 0, 0, 0));
+
+	Vertex* source = travelAgencyGraph.getVertex(Node(idSource));
 	visited.push_back((*source));
 
 	while (true) {
@@ -254,7 +256,7 @@ void TravelAgency::CustomTrip()
 			throw exception_or_error("O input nao e valido! Tente novamente.");
 		}
 
-		Vertex* dest = travelAgencyGraph.getVertex(Node(idDest, "", 0, 0, 0));
+		Vertex* dest = travelAgencyGraph.getVertex(Node(idDest));
 		toVisit.push_back((*dest));
 		accomTime.insert(make_pair(dest->getInfo().getCityName(), accommodationTime));
 	}
