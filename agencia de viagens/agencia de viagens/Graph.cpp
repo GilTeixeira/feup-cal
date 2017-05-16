@@ -230,11 +230,6 @@ void Graph::includeOnVectorApproximateMatching(vector <pair<string, int>> &appro
 	const string &toSearch, const string &monumentFound,const int &idNodeFound) const
 {
 	int dist = editDistance(monumentFound, toSearch);
-	if (approximateStrings.size() < 5) {
-		approximateStrings.push_back(make_pair(monumentFound, idNodeFound));
-		distance.push_back(dist);
-		return;
-	}
 
 	if (dist > distance.at(4))
 		return;
@@ -245,8 +240,10 @@ void Graph::includeOnVectorApproximateMatching(vector <pair<string, int>> &appro
 		if (dist < distance.at(i)) {
 			distance.insert(distance.begin() + i, dist);
 			approximateStrings.insert(approximateStrings.begin() + i, make_pair(monumentFound, idNodeFound));
-			distance.pop_back();
-			approximateStrings.pop_back();
+			if(approximateStrings.size()>5){
+				distance.pop_back();
+				approximateStrings.pop_back();
+			}
 			break;
 		}
 	}
