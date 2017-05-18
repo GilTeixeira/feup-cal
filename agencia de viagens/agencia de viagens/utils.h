@@ -87,8 +87,4 @@ void addDaysToDate(string & dateStr, unsigned int days);
 *@return 2d Coordinates.
 */
 pair<int, int> CoodinatesToMap(const float longitude, const float latitude);
-
-int editDistance(string pattern, string text);
-int kmp(string text, string pattern);
-
 #endif

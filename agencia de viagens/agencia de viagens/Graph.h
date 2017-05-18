@@ -8,7 +8,7 @@
 
 #include "Node.h"
 #include "Weight.h"
-#include "utils.h"
+#include "StringAlgorithms.h"
 
 constexpr int NOT_VISITED = 0;
 constexpr int BEING_VISITED = 1;
