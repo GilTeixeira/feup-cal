@@ -93,7 +93,7 @@ public:
 	/**
 	*
 	*/
-	vector<pair<string,int>> monumentsSearch(const string &tosearch) const;
+	vector<pair<string,int>> monumentsSearch(const string &tosearch, bool &foundMatch) const;
 
 
 

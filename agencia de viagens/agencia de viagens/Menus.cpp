@@ -10,7 +10,8 @@ void mainMenu(TravelAgency &travelAgency)
 		cout << BIG_TAB << "Menu Principal" << endl << endl;
 		cout << TAB << "1 - Viajar para um destino" << endl;
 		cout << TAB << "2 - Viajar para varios destinos" << endl;
-		cout << TAB << "3 - Visualizar Grafo." << endl;
+		cout << TAB << "3 - Pesquisa por monumentos" << endl;
+		cout << TAB << "4 - Visualizar Grafo." << endl;
 		cout << TAB << "0 - Sair" << endl << endl; 
 
 		cout << "Escolha uma opcao: ";
@@ -34,7 +35,11 @@ void mainMenu(TravelAgency &travelAgency)
 			clrscr();
 			callCustomTrip(travelAgency);
 			break;
-		case 3: 
+		case 3:
+			clrscr();
+			travelAgency.searchMonumentsCities();
+			break;
+		case 4: 
 			graphviewer(travelAgency);
 			clrscr();
 			break;

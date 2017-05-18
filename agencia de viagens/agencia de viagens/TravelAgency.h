@@ -39,6 +39,7 @@ private:
 	*@param notWantedTypes tranportation types that the user doens't want to use
 	*/
 	void outPut_CustomTrip(const vector < list<Vertex>> &shortestPath, const map<string, uint> &accomTime, string &dateStr, const set <string> &notWantedTypes);
+	
 public:
 	/**
 	*@brief Constructor of the class TravelAgency
@@ -54,6 +55,7 @@ public:
 	*/
 	void CustomTrip();
 
+	void searchMonumentsCities();
 
 	friend void graphviewer(TravelAgency& travelAgencyGraph);
 };

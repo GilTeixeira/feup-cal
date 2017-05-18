@@ -293,4 +293,57 @@ void TravelAgency::outPut_CustomTrip(const vector < list<Vertex>> &shortestPath,
 	return;
 }
 
+void TravelAgency::searchMonumentsCities() {
+	string line;
+
+	cout << BIG_TAB << "Pesquisa de pontos de interesse" << endl << endl;
+	cout << "Insira os Pontos de Interesse que pretende visitar, separados por newline e sem acentuacao!" << endl;
+	cout << "Para terminar pressione enter sem inserir input" << endl << endl;
+	
+	cin.ignore(numeric_limits<streamsize>::max(), '\n');
+	
+	do {
+		bool foundMatch = false;
+		vector<pair<string, int>> found;
+		cout << "> ";
+
+		
+		getline(cin, line);
+		
+		if (line == "")
+			continue;
+
+		found = travelAgencyGraph.monumentsSearch(line, foundMatch);
+
+		if (found.size() == 0) {
+			cout << TAB << "Nao foram encontrados resultados.";
+			continue;
+		}
+		
+		Node foundID(NULL);
+		vector<string> cities;
+
+		for (int i = 0; i < found.size(); i++) {
+			foundID = Node(found.at(i).second);
+			cities.push_back(travelAgencyGraph.getVertex(foundID)->getInfo().getCityName());
+		}
+
+		if (foundMatch) 
+			cout << endl << TAB << "Foram encontrados " << found.size() << " resultados: " << endl;
+		else	
+			cout << endl << TAB << "Nao foram encontrados resultados exatos para a sua pesquisa, aqui estao os 5 monumentos com o nome mais proximo do seu input:"<< endl;
+			
+		cout << left << setw(25) <<"   Monuments" << "City" << endl;
+		for (int i = 0; i < found.size(); i++)
+			cout <<left << setw(25) << to_string(i+1)+ ". " + found.at(i).first << cities.at(i) << endl;
+		cout << endl;
+
+	} while (line != "");
+
+
+	system("Pause");
+	clrscr();
+	return;
+}
+
 

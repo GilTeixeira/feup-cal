@@ -197,12 +197,11 @@ void Graph::customTripAlgorithm(vector<Vertex>& visited, vector<Vertex>& toVisit
 	return;
 }
 
-vector<pair<string, int>> Graph::monumentsSearch(const string &tosearch) const
+vector<pair<string, int>> Graph::monumentsSearch(const string &tosearch, bool &foundMatch) const
 {
 	vector <pair<string, int>> matchingStrings;
 	vector <pair<string, int>> approximateStrings(5);
 	vector <int> distance(5, numeric_limits<int>::max());
-	bool foundMatch = false;
 
 
 	for (size_t node = 0; node < vertexes.size(); node++) {
