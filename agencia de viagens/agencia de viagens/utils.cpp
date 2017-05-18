@@ -249,3 +249,4 @@ int editDistance(string pattern, string text)
 	}
 	return d[n];
 }
+
