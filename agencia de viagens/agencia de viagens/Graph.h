@@ -8,7 +8,6 @@
 
 #include "Node.h"
 #include "Weight.h"
-#include "utils.h"
 
 constexpr int NOT_VISITED = 0;
 constexpr int BEING_VISITED = 1;
@@ -89,20 +88,8 @@ public:
 	* @param notWantedTypes tranportation types that the user doens't want to use
 	*/
 	void customTripAlgorithm(vector<Vertex> &visited, vector<Vertex> &toVisit, vector < list <Vertex> > &shortestPath, const set<string> &notWantedTypes);
-
-	/**
-	*
-	*/
-	vector<pair<string,int>> monumentsSearch(const string &tosearch) const;
-
-
-
 private:
 	std::vector<Vertex *> vertexes;
-	/**
-	*
-	*/
-	void includeOnVectorApproximateMatching(vector <pair<string, int>> &approximateStrings, vector <int> &distance, const string &toSearch, const string &monumentFound, const int &idNodeFound) const;
 };
 
 class Vertex
