@@ -200,18 +200,18 @@ void Graph::customTripAlgorithm(vector<Vertex>& visited, vector<Vertex>& toVisit
 vector<pair<string, int>> Graph::monumentsSearch(const string &tosearch) const
 {
 	vector <pair<string, int>> matchingStrings;
-	vector <pair<string, int>> approximateStrings;
-	vector <int> distance;
+	vector <pair<string, int>> approximateStrings(5);
+	vector <int> distance(5, numeric_limits<int>::max());
 	bool foundMatch = false;
 
 
-	for (size_t node = 0; node < vertexes.size(); node++){
+	for (size_t node = 0; node < vertexes.size(); node++) {
 		vector<string> monuments = vertexes.at(node)->getInfo().getMonuments();
 		for (size_t mnmts = 0; mnmts < monuments.size(); mnmts++) {
 			string monumentFound = monuments.at(mnmts);
 			int idNodeFound = vertexes.at(node)->getInfo().getNodeID();
 			if (kmp(monuments.at(mnmts), tosearch)) {
-				matchingStrings.push_back(make_pair(monumentFound,idNodeFound));
+				matchingStrings.push_back(make_pair(monumentFound, idNodeFound));
 				foundMatch = true;
 			}
 			if (!foundMatch) {
@@ -220,14 +220,14 @@ vector<pair<string, int>> Graph::monumentsSearch(const string &tosearch) const
 		}
 	}
 
-	if(foundMatch)
+	if (foundMatch)
 		return matchingStrings;
 
 	return approximateStrings;
 }
 
 void Graph::includeOnVectorApproximateMatching(vector <pair<string, int>> &approximateStrings, vector <int> &distance,
-	const string &toSearch, const string &monumentFound,const int &idNodeFound) const
+	const string &toSearch, const string &monumentFound, const int &idNodeFound) const
 {
 	int dist = editDistance(monumentFound, toSearch);
 
@@ -240,7 +240,7 @@ void Graph::includeOnVectorApproximateMatching(vector <pair<string, int>> &appro
 		if (dist < distance.at(i)) {
 			distance.insert(distance.begin() + i, dist);
 			approximateStrings.insert(approximateStrings.begin() + i, make_pair(monumentFound, idNodeFound));
-			if(approximateStrings.size()>5){
+			if (approximateStrings.size()>5) {
 				distance.pop_back();
 				approximateStrings.pop_back();
 			}

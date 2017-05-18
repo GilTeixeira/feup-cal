@@ -53,6 +53,8 @@ public:
 	*@brief User inputs necessary to create a custom trip using the custom algorithm
 	*/
 	void CustomTrip();
+
+
 	friend void graphviewer(TravelAgency& travelAgencyGraph);
 };
 
