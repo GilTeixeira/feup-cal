@@ -303,21 +303,21 @@ void TravelAgency::tripToMonuments(Vertex* source,const vector<pair<string, int>
 		unsigned posChoice;
 		cout << "Insira qual dos monumentos pretende visitar, 0 para cancelar:" << endl;
 		for (size_t i = 0; i < found.size(); i++) {
-			cout << i+1 << ". " << found.at(i).first << " - " << cities.at(i)<< endl;
+			cout << i + 1 << ". " << found.at(i).first << " - " << cities.at(i) << endl;
 		}
-cout << endl;
-cout << "> ";
-cin >> posChoice;
+		cout << endl;
+		cout << "> ";
+		cin >> posChoice;
 
-if (!cin.good()) {
-	cin.clear();
-	cin.ignore(numeric_limits<streamsize>::max(), '\n');
-	throw exception_or_error("O input nao e valido! Tente novamente.");
-}
+		if (!cin.good()) {
+			cin.clear();
+			cin.ignore(numeric_limits<streamsize>::max(), '\n');
+			throw exception_or_error("O input nao e valido! Tente novamente.");
+		}
 
-if (posChoice == 0)
-return;
-dest = travelAgencyGraph.getVertex(Node(found.at(posChoice).second));
+		if (posChoice == 0)
+			return;
+		dest = travelAgencyGraph.getVertex(Node(found.at(posChoice-1).second));
 	}
 
 	string dateStr;
