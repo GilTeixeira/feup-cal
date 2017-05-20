@@ -59,7 +59,7 @@ void callTripToOneCity(TravelAgency &travelAgency) {
 	try{ 
 		travelAgency.TripToOneCity(); 
 	}
-	catch (exception_or_error x) {
+	catch (exception_or_error &x) {
 		cerr << endl << x.get_reason() << endl << endl;
 		system("PAUSE");
 		clrscr();
@@ -71,7 +71,7 @@ void callCustomTrip(TravelAgency &travelAgency) {
 	try {
 		travelAgency.CustomTrip();
 	}
-	catch (exception_or_error x) {
+	catch (exception_or_error &x) {
 		cerr << endl << x.get_reason() << endl << endl;
 		system("PAUSE");
 		clrscr();

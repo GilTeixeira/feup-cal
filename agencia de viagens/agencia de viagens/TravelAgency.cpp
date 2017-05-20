@@ -61,25 +61,13 @@ void TravelAgency::TripToOneCity()
 	set <string> notWantedTypes;
 	
 	vector <Vertex *> allCitys = travelAgencyGraph.getVertexes();
-	if (allCitys.size() == 0) throw exception_or_error("O grafo não contém nenhuma informação verifique o ficheiro de texto.");
+	if (allCitys.size() == 0) throw exception_or_error("O grafo nao contem nenhuma informação verifique o ficheiro de texto.");
 
 	cout << BIG_TAB << "Assitente de Viagem" << endl << endl;
 
-	for (Vertex * vert : allCitys) {
-		Node tmp = vert->getInfo();
-		cout << TAB << tmp.getNodeID() << " - " << tmp.getCityName()<< endl;
-	}
-	cout << endl;
-	
-	cout << "Insira o numero correpondente a cidade que pretende iniciar a viagem, 0 para cancelar: " << endl; 
-	cin >> idSource;
-
-	if (!cin.good()|| idSource> (uint) allCitys.at(allCitys.size()-1)->getInfo().getNodeID()) {
-		cin.clear();
-		cin.ignore(numeric_limits<streamsize>::max(), '\n');
-		throw exception_or_error("O input nao e valido! Tente novamente.");
-	}
-	if (idSource == 0) return;
+	Vertex* source = read_current_city(idSource);
+	if (source == nullptr)
+		return;
 	
 	cout << "Insira o numero correpondente a cidade que pretende visitar, 0 para cancelar: " << endl;
 	cin >> idDest;
@@ -94,7 +82,6 @@ void TravelAgency::TripToOneCity()
 	if (idSource == idDest) throw ("Escolheu a mesma cidade para a origem e o seu destino!");
 
 
-	Vertex* source = travelAgencyGraph.getVertex(Node(idSource));
 	Vertex* dest = travelAgencyGraph.getVertex(Node(idDest));
 
 	cout << "Insira a data em que pretende iniciar a viagem: " << endl;
@@ -195,40 +182,24 @@ void TravelAgency::outPut_TripToOneCity(const list<Vertex> &shortestPath, uint a
 void TravelAgency::CustomTrip()
 {
 
-	unsigned int idSource, idDest, accommodationTime;
+	unsigned int  idSource,idDest, accommodationTime;
 	vector<Vertex> visited;
 	vector<Vertex> toVisit;
 	map<string,uint> accomTime;
 
 	set <string> notWantedTypes;
 	string dateStr;
-
-
-	vector <Vertex *> allCitys = travelAgencyGraph.getVertexes();
-	if (allCitys.size() == 0) throw exception_or_error("O grafo não contém nenhuma informação verifique o ficheiro de texto.");
 	
 	cout << BIG_TAB << "Assitente de Viagem" << endl << endl;
 
-	for (Vertex * vert : allCitys) {
-		Node tmp = vert->getInfo();
-		cout << TAB << tmp.getNodeID() << " - " << tmp.getCityName() << endl;
-	}
-	cout << endl;
+	Vertex* source = read_current_city(idSource);
 
-	cout << "Insira o numero correpondente a cidade que pretende iniciar a viagem, 0 para cancelar: " << endl;
-	cin >> idSource;
+	if (source == nullptr)
+		return;
 
-	if (!cin.good() || idSource> (uint)allCitys.at(allCitys.size() - 1)->getInfo().getNodeID()) {
-		cin.clear();
-		cin.ignore(numeric_limits<streamsize>::max(), '\n');
-		throw exception_or_error("O input nao e valido! Tente novamente.");
-	}
-	if (idSource == 0) return;
-
-
-	Vertex* source = travelAgencyGraph.getVertex(Node(idSource));
 	visited.push_back((*source));
 
+	vector <Vertex *> allCitys = travelAgencyGraph.getVertexes();
 	while (true) {
 		cout << "Insira o numero correpondente a uma das cidades que pretende visitar, 0 se ja inseriu todas as pretendidadas: " << endl;
 		cin >> idDest;
@@ -280,6 +251,32 @@ void TravelAgency::CustomTrip()
 	return;
 }
 
+Vertex* TravelAgency::read_current_city(unsigned int &idSource) {
+	
+	vector <Vertex *> allCitys = travelAgencyGraph.getVertexes();
+	if (allCitys.size() == 0) throw exception_or_error("O grafo não contém nenhuma informação verifique o ficheiro de texto.");
+
+	for (Vertex * vert : allCitys) {
+		Node tmp = vert->getInfo();
+		cout << TAB << tmp.getNodeID() << " - " << tmp.getCityName() << endl;
+	}
+	cout << endl;
+
+	cout << "Insira o numero correpondente a cidade que pretende iniciar a viagem, 0 para cancelar: " << endl;
+	cin >> idSource;
+
+	if (!cin.good() || idSource> (uint)allCitys.at(allCitys.size() - 1)->getInfo().getNodeID()) {
+		cin.clear();
+		cin.ignore(numeric_limits<streamsize>::max(), '\n');
+		throw exception_or_error("O input nao e valido! Tente novamente.");
+	}
+	if (idSource == 0) return nullptr;
+
+
+	Vertex* source = travelAgencyGraph.getVertex(Node(idSource));
+	return source;
+}
+
 void TravelAgency::outPut_CustomTrip(const vector < list<Vertex>> &shortestPath, const map<string, uint> &accomTime, string &dateStr, const set <string> &notWantedTypes) {
 	int i=1;
 	for (list<Vertex> list : shortestPath) {
@@ -293,23 +290,89 @@ void TravelAgency::outPut_CustomTrip(const vector < list<Vertex>> &shortestPath,
 	return;
 }
 
+void TravelAgency::tripToMonuments(Vertex* source,const vector<pair<string, int>> &found, const vector <string> cities) 
+{
+	unsigned int idDest;
+	unsigned posChoice;
+	Vertex* dest;
+	if (found.size() == 1) {
+		idDest = found.at(0).second;
+		dest = travelAgencyGraph.getVertex(Node(idDest));
+	}
+	else {
+		unsigned posChoice;
+		cout << "Insira qual dos monumentos pretende visitar, 0 para cancelar:" << endl;
+		for (size_t i = 0; i < found.size(); i++) {
+			cout << i+1 << ". " << found.at(i).first << " - " << cities.at(i)<< endl;
+		}
+cout << endl;
+cout << "> ";
+cin >> posChoice;
+
+if (!cin.good()) {
+	cin.clear();
+	cin.ignore(numeric_limits<streamsize>::max(), '\n');
+	throw exception_or_error("O input nao e valido! Tente novamente.");
+}
+
+if (posChoice == 0)
+return;
+dest = travelAgencyGraph.getVertex(Node(found.at(posChoice).second));
+	}
+
+	string dateStr;
+	cout << "Insira a data em que pretende iniciar a viagem: " << endl;
+	cin >> dateStr;
+	Date date = Date(dateStr);
+
+	unsigned int accommodationTime;
+	cout << "Deseja adquirir alojamento por quanto tempo (0 se não pretender): " << endl;
+	cin >> accommodationTime;
+
+	if (!cin.good() || accommodationTime > 60) {
+		cin.clear();
+		cin.ignore(numeric_limits<streamsize>::max(), '\n');
+		throw exception_or_error("O input nao e valido! Tente novamente.");
+	}
+
+	set<string> notWantedTypes = load_notWantedTypes();
+
+	list <Vertex> shortestPath;
+	if (travelAgencyGraph.shortestPath((*source), (*dest), shortestPath, notWantedTypes) == 0.0) {
+		throw exception_or_error("O destino que escolheu e impossivel de alcançar apartir da origem dada");
+	}
+	clrscr();
+	cout << "A sua viagem foi calculada, aqui esta a sua informacao: " << endl << endl;
+	outPut_TripToOneCity(shortestPath, accommodationTime, dateStr, notWantedTypes);
+	system("Pause");
+	clrscr();
+	return;
+}
+
 void TravelAgency::searchMonumentsCities() {
 	string line;
+
+	unsigned int idSource;
+	Vertex* source = read_current_city(idSource);
+
+	if (source == nullptr)
+		return;
+
+	clrscr();
 
 	cout << BIG_TAB << "Pesquisa de pontos de interesse" << endl << endl;
 	cout << "Insira os Pontos de Interesse que pretende visitar, separados por newline e sem acentuacao!" << endl;
 	cout << "Para terminar pressione enter sem inserir input" << endl << endl;
-	
-	cin.ignore(numeric_limits<streamsize>::max(), '\n');
-	
+
+
 	do {
 		bool foundMatch = false;
 		vector<pair<string, int>> found;
 		cout << "> ";
 
-		
+		cin.ignore(numeric_limits<streamsize>::max(), '\n');
 		getline(cin, line);
-		
+
 		if (line == "")
 			continue;
 
@@ -319,7 +382,7 @@ void TravelAgency::searchMonumentsCities() {
 			cout << TAB << "Nao foram encontrados resultados.";
 			continue;
 		}
-		
+
 		Node foundID(NULL);
 		vector<string> cities;
 
@@ -328,15 +391,33 @@ void TravelAgency::searchMonumentsCities() {
 			cities.push_back(travelAgencyGraph.getVertex(foundID)->getInfo().getCityName());
 		}
 
-		if (foundMatch) 
+		if (foundMatch)
 			cout << endl << TAB << "Foram encontrados " << found.size() << " resultados: " << endl;
-		else	
-			cout << endl << TAB << "Nao foram encontrados resultados exatos para a sua pesquisa, aqui estao os 5 monumentos com o nome mais proximo do seu input:"<< endl;
-			
-		cout << left << setw(25) <<"   Monuments" << "City" << endl;
+		else
+			cout << endl << TAB << "Nao foram encontrados resultados exatos para a sua pesquisa, aqui estao os 5 monumentos com o nome mais proximo do seu input:" << endl;
+
+		cout << left << setw(25) << "   Monuments" << "City" << endl;
 		for (int i = 0; i < found.size(); i++)
-			cout <<left << setw(25) << to_string(i+1)+ ". " + found.at(i).first << cities.at(i) << endl;
+			cout << left << setw(25) << to_string(i + 1) + ". " + found.at(i).first << cities.at(i) << endl;
 		cout << endl;
+
+		cout << "Deseja marcar viagem para algum dos destinos apresentados no ecra? (s/y se sim)" << endl;
+		cin >> line;
+		if (line == "s" || line == "y" || line == "S" || line == "Y") {
+			clrscr();
+			
+			for (size_t i = 0; i < found.size(); i++){
+				if (found.at(i).second == source->getInfo().getNodeID()) {
+					found.erase(found.begin() + i);
+					cities.erase(cities.begin() + i);
+				}
+			}
+			tripToMonuments(source,found,cities);
+			clrscr();
+			cout << BIG_TAB << "Pesquisa de pontos de interesse" << endl << endl;
+			cout << "Insira os Pontos de Interesse que pretende visitar, separados por newline e sem acentuacao!" << endl;
+			cout << "Para terminar pressione enter sem inserir input" << endl << endl;
+		}
 
 	} while (line != "");
 

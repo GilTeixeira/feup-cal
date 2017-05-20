@@ -18,6 +18,7 @@ class TravelAgency
 private:
 	Graph travelAgencyGraph;
 	vector<string> transportTypes;
+	Vertex * read_current_city(unsigned int &idSource)  ;
 	/**
 	*@brief Asks the user what tranportation types he doens't want to use
 	*@return set<string> with the transportation types
@@ -39,6 +40,9 @@ private:
 	*@param notWantedTypes tranportation types that the user doens't want to use
 	*/
 	void outPut_CustomTrip(const vector < list<Vertex>> &shortestPath, const map<string, uint> &accomTime, string &dateStr, const set <string> &notWantedTypes);
+
+	void tripToMonuments(Vertex* source, const vector<pair<string, int>> &found, const vector <string> cities);
+
 	
 public:
 	/**
