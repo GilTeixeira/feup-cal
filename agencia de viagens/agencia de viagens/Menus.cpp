@@ -37,7 +37,7 @@ void mainMenu(TravelAgency &travelAgency)
 			break;
 		case 3:
 			clrscr();
-			travelAgency.searchMonumentsCities();
+			callSearchforMonuments(travelAgency);
 			break;
 		case 4: 
 			graphviewer(travelAgency);
@@ -55,7 +55,7 @@ void mainMenu(TravelAgency &travelAgency)
 	return;
 }
 
-void callTripToOneCity(TravelAgency &travelAgency) {
+static void callTripToOneCity(TravelAgency &travelAgency) {
 	try{ 
 		travelAgency.TripToOneCity(); 
 	}
@@ -67,9 +67,21 @@ void callTripToOneCity(TravelAgency &travelAgency) {
 	return;
 }
 
-void callCustomTrip(TravelAgency &travelAgency) {
+static void callCustomTrip(TravelAgency &travelAgency) {
 	try {
 		travelAgency.CustomTrip();
+	}
+	catch (exception_or_error &x) {
+		cerr << endl << x.get_reason() << endl << endl;
+		system("PAUSE");
+		clrscr();
+	}
+	return;
+}
+
+static void callSearchforMonuments(TravelAgency &travelAgency) {
+	try {
+		travelAgency.searchMonumentsCities();
 	}
 	catch (exception_or_error &x) {
 		cerr << endl << x.get_reason() << endl << endl;

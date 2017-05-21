@@ -31,12 +31,13 @@ void mainMenu(TravelAgency &travelAgency);
 *@brief Calculates the best Trip to a single city
 *@param travelAgency The Travel Agency
 */
-void callTripToOneCity(TravelAgency &travelAgency);
+static void callTripToOneCity(TravelAgency &travelAgency);
 
 /**
 *@brief Calculates the best Trip to multiple cities
 *@param travelAgency The Travel Agency
 */
-void callCustomTrip(TravelAgency &travelAgency);
+static void callCustomTrip(TravelAgency &travelAgency);
+static void callSearchforMonuments(TravelAgency &travelAgency);
 
 #endif

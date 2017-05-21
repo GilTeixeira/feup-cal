@@ -79,7 +79,7 @@ void TravelAgency::TripToOneCity()
 	}
 
 	if (idDest == 0) return;
-	if (idSource == idDest) throw ("Escolheu a mesma cidade para a origem e o seu destino!");
+	if (idSource == idDest) throw  exception_or_error("Escolheu a mesma cidade para a origem e o seu destino!");
 
 
 	Vertex* dest = travelAgencyGraph.getVertex(Node(idDest));
@@ -211,11 +211,11 @@ void TravelAgency::CustomTrip()
 		}
 
 		if (idDest == 0) break;
-		if (idSource == idDest) throw ("Escolheu a mesma cidade para a origem e para um dos seus destinos!");
+		if (idSource == idDest) throw exception_or_error("Escolheu a mesma cidade para a origem e para um dos seus destinos!");
 		
 		for (Vertex checkingDup: toVisit) {
 			if (checkingDup.getInfo().getNodeID() == idDest) 
-				throw ("Nao pode escolher o mesmo destino mais que uma vez!");
+				throw exception_or_error("Nao pode escolher o mesmo destino mais que uma vez!");
 		}
 
 		cout << "Deseja adquirir alojamento por quanto tempo nesta cidade (0 se não pretender): " << endl;
