@@ -29,7 +29,10 @@ public:
 	*@param latitude
 	*/
 	Node(int nodeID, string cityName, vector <string> monuments, Accommodation accommodation, float longitude, float latitude);
-
+	/**
+	*@brief Creates a Node
+	*@param nodeID
+	*/
 	Node(int nodeID);
 	/**
 	*@brief Gets the Node's ID.

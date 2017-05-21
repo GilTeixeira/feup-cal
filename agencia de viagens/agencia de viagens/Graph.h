@@ -91,7 +91,10 @@ public:
 	void customTripAlgorithm(vector<Vertex> &visited, vector<Vertex> &toVisit, vector < list <Vertex> > &shortestPath, const set<string> &notWantedTypes);
 
 	/**
-	*
+	*Search Algorithm for strings exact search if not returns the 5 most approximated ones.
+	*@param tosearch string to find
+	*@param foundMatch true if the algorithm found the string tosearch in all the cities monuments, false otherwise
+	*@return vector<pair<string,int>> pair with the name of the monument found and ID of the city/node
 	*/
 	vector<pair<string,int>> monumentsSearch(const string &tosearch, bool &foundMatch) const;
 
@@ -100,7 +103,11 @@ public:
 private:
 	std::vector<Vertex *> vertexes;
 	/**
-	*
+	*Used on the function monumentsSearch to help find the 5 most approximated strings
+	*@param approximateStrings approximated monuments and their citys id;
+	*@param distance distance of the string in approximated strings to toSearch
+	*@param monumentFound string to compare and be included in approximateStrings if it's distance to toSearch is less then the ones in there
+	*@param idNodeFound monument city/node Id
 	*/
 	void includeOnVectorApproximateMatching(vector <pair<string, int>> &approximateStrings, vector <int> &distance, const string &toSearch, const string &monumentFound, const int &idNodeFound) const;
 };

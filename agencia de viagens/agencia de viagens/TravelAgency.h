@@ -40,7 +40,12 @@ private:
 	*@param notWantedTypes tranportation types that the user doens't want to use
 	*/
 	void outPut_CustomTrip(const vector < list<Vertex>> &shortestPath, const map<string, uint> &accomTime, string &dateStr, const set <string> &notWantedTypes);
-
+	/**
+	*@brief Makes a trip to one of the monuments found
+	*@param source vertex* with the source of the trip;
+	*@param found monuments found
+	*@param cities cities of the monuments found
+	*/
 	void tripToMonuments(Vertex* source, const vector<pair<string, int>> &found, const vector <string> cities);
 
 	
@@ -58,7 +63,9 @@ public:
 	*@brief User inputs necessary to create a custom trip using the custom algorithm
 	*/
 	void CustomTrip();
-
+	/**
+	*@brief User inputs necessary to search for a monuments and it's output
+	*/
 	void searchMonumentsCities();
 
 	friend void graphviewer(TravelAgency& travelAgencyGraph);

@@ -38,6 +38,10 @@ static void callTripToOneCity(TravelAgency &travelAgency);
 *@param travelAgency The Travel Agency
 */
 static void callCustomTrip(TravelAgency &travelAgency);
+/**
+*@brief Searches for monuments
+*@param travelAgency The Travel Agency
+*/
 static void callSearchforMonuments(TravelAgency &travelAgency);
 
 #endif
