@@ -300,7 +300,6 @@ void TravelAgency::tripToMonuments(Vertex* source,const vector<pair<string, int>
 		dest = travelAgencyGraph.getVertex(Node(idDest));
 	}
 	else {
-		unsigned posChoice;
 		cout << "Insira qual dos monumentos pretende visitar, 0 para cancelar:" << endl;
 		for (size_t i = 0; i < found.size(); i++) {
 			cout << i + 1 << ". " << found.at(i).first << " - " << cities.at(i) << endl;
@@ -375,6 +374,8 @@ void TravelAgency::searchMonumentsCities() {
 
 		if (line == "")
 			continue;
+
+		transform(line.begin(), line.end(), line.begin(), tolower);
 
 		found = travelAgencyGraph.monumentsSearch(line, foundMatch);
 
